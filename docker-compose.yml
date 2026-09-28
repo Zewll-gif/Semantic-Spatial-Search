@@ -3,7 +3,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: geoai-app
+    container_name: semantic_app
     working_dir: /app
     ports:
       - "8795:8795"
