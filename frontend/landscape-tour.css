@@ -9,7 +9,7 @@ Dependency สำคัญ: backend API และ class schema
 */
 .guided-tour { position: relative; height: 600svh; color: #fff; background: #0b201a; scroll-margin-top: 0; }
 .tour-sticky { position: sticky; top: 0; height: 100svh; min-height: 580px; overflow: hidden; isolation: isolate; background: #0c211b; }
-.tour-ambient { position: absolute; inset: -7%; z-index: -3; background: url('/aoi/full_aoi_rgb.png') center / cover no-repeat; filter: blur(36px) saturate(.65) brightness(.54); transform: scale(1.08); }
+.tour-ambient { position: absolute; inset: -7%; z-index: -3; background: url('aoi/full_aoi_rgb.png') center / cover no-repeat; filter: blur(36px) saturate(.65) brightness(.54); transform: scale(1.08); }
 .tour-world { position: absolute; z-index: -2; top: 0; left: 0; width: max(100vw, 89svh); aspect-ratio: 1038 / 1164; transform-origin: 0 0; will-change: transform; }
 .tour-world > img { display: block; width: 100%; height: 100%; object-fit: fill; filter: saturate(.86) contrast(1.06) brightness(.82); }
 .tour-vignette { position: absolute; z-index: -1; inset: 0; pointer-events: none; background: linear-gradient(90deg,rgba(4,20,16,.82),rgba(4,20,16,.24) 48%,rgba(4,20,16,.13) 80%),linear-gradient(0deg,rgba(4,20,16,.77),transparent 36%,transparent 64%,rgba(4,20,16,.25)); }

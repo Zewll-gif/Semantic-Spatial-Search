@@ -45,7 +45,7 @@ window.GeoAIClasses = (() => {
       img.src = `${img.getAttribute('src').split('?')[0]}?v=${version}`;
     });
   };
-  const ready = fetch('/api/class-schema', {cache:'no-store'})
+  const ready = fetch(window.GeoAIApp.url('api/class-schema'), {cache:'no-store'})
     .then(response => { if (!response.ok) throw new Error(`Class schema HTTP ${response.status}`); return response.json(); })
     .then(install);
   return {

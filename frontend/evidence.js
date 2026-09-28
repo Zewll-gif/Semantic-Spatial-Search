@@ -42,7 +42,7 @@ Dependency สำคัญ: backend API และ class schema
     const cls = Number(t.dominant_class || 0);
     try {
       const makeReq = () => ({method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({geometry:geom, predicted_class:cls})});
-      const [sr, er, lr] = await Promise.all([fetch('/api/tools/spectral-consistency', makeReq()), fetch('/api/tools/external-reference', makeReq()), fetch('/api/evidence/lulc-comparison', makeReq())]);
+      const [sr, er, lr] = await Promise.all([fetch(window.GeoAIApp.url('api/tools/spectral-consistency'), makeReq()), fetch(window.GeoAIApp.url('api/tools/external-reference'), makeReq()), fetch(window.GeoAIApp.url('api/evidence/lulc-comparison'), makeReq())]);
       const spectral = await sr.json(), external = await er.json(), lulcData = await lr.json();
       const spectralStatus = spectral.overall_spectral_status || 'UNAVAILABLE';
       const externalStatus = external.status || 'UNAVAILABLE';
@@ -74,7 +74,7 @@ Dependency สำคัญ: backend API และ class schema
   document.addEventListener('click', async e => {
     const b = e.target.closest('.why-result'); if (!b) return;
     const id = b.closest('.result')?.querySelector('.tile')?.textContent; if (!id) return;
-    try { render(await fetch(`/api/tiles/${encodeURIComponent(id)}`).then(r => r.json())); } catch (_) { emptyState(); }
+    try { render(await fetch(window.GeoAIApp.url(`api/tiles/${encodeURIComponent(id)}`)).then(r => r.json())); } catch (_) { emptyState(); }
   });
   $('#whyBtn')?.addEventListener('click', () => { const detail = $('#whyDetail'); if (detail) { detail.hidden = false; detail.open = true; detail.scrollIntoView({behavior:'smooth', block:'nearest'}); } });
 })();

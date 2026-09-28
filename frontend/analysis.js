@@ -229,7 +229,7 @@
     content.append(list); box.append(content); host.append(box);
   }
   async function showPreview(geom) {
-    const response = await fetch('/api/aoi/preview', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ geometry: geom }) });
+    const response = await fetch(window.GeoAIApp.url('api/aoi/preview'), { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ geometry: geom }) });
     if (!response.ok) throw Error('preview unavailable');
     const bbox = response.headers.get('X-GeoAI-Rendered-Bbox').split(',').map(Number);
     previewUrl = URL.createObjectURL(await response.blob()); analysisGroup = analysisGroup || L.layerGroup().addTo(map); analysisGroup.clearLayers();
@@ -237,7 +237,7 @@
     L.geoJSON(geom, { style: { color: '#fff', weight: 3, dashArray: '7 5', fill: false }, interactive: false }).addTo(analysisGroup);
   }
   async function showExternalPreview(geom, layer = 'rgb') {
-    const response = await fetch('/api/aoi/external/preview', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ geometry: geom, layer }) });
+    const response = await fetch(window.GeoAIApp.url('api/aoi/external/preview'), { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ geometry: geom, layer }) });
     if (!response.ok) { const data = await response.json().catch(() => ({})); throw Error(data.detail?.message || 'external preview unavailable'); }
     const bbox = response.headers.get('X-GeoAI-Rendered-Bbox').split(',').map(Number);
     if (previewUrl) URL.revokeObjectURL(previewUrl); previewUrl = URL.createObjectURL(await response.blob()); analysisGroup = analysisGroup || L.layerGroup().addTo(map); analysisGroup.clearLayers();
@@ -259,7 +259,7 @@
   async function analyzeProjectOnly(geom) {
     const host = ensureHost(); loading(host); legacyRunButton.disabled = true; window.GeoAIDrawUI?.setAnalyzing(true);
     try {
-      const response = await fetch('/api/aoi/analyze', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ geometry: geom, analysis_mode: 'project_only' }) });
+      const response = await fetch(window.GeoAIApp.url('api/aoi/analyze'), { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ geometry: geom, analysis_mode: 'project_only' }) });
       const data = await response.json(); if (!response.ok) throw Error(data.detail?.message || 'analysis failed');
       await showPreview(data.geometry); current = data; history.unshift(data); if (history.length > 5) history.pop(); renderStats(host, data); window.GeoAIDrawUI?.setAnalyzed(true);
     } catch (error) { renderFailure(host, error, () => analyzeProjectOnly(geom)); }
@@ -268,7 +268,7 @@
   async function analyzeExternal(geom) {
     const host = ensureHost(); loading(host, 'external'); legacyRunButton.disabled = true; window.GeoAIDrawUI?.setAnalyzing(true); clearOverlay();
     try {
-      const response = await fetch('/api/aoi/external/analyze', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ geometry: geom }) });
+      const response = await fetch(window.GeoAIApp.url('api/aoi/external/analyze'), { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ geometry: geom }) });
       const data = await response.json(); if (!response.ok) throw Error(`${data.detail?.code || ''} ${data.detail?.message || 'external analysis failed'}`);
       current = data; externalLayer = 'rgb'; renderExternalStats(host, data, geom); await showExternalPreview(geom, externalLayer); focusExternalAoi(geom); window.GeoAIDrawUI?.setAnalyzed(true);
     } catch (error) { renderFailure(host, error, () => analyzeExternal(geom)); }
@@ -285,7 +285,7 @@
     const started = performance.now();
     try {
       window.clearRoiPreview?.(); clearOverlay(); correctionRecord = null; correctionFeature = null;
-      const response = await fetch('/api/aoi/analyze', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ geometry: geom }) });
+      const response = await fetch(window.GeoAIApp.url('api/aoi/analyze'), { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ geometry: geom }) });
       const data = await response.json(); if (!response.ok) throw Error(data.detail?.message || data.detail || 'analysis failed');
       const remaining = Math.max(0, 520 - (performance.now() - started)); if (remaining) await wait(remaining);
       if (data.status === 'external_option' || data.status === 'partial_coverage') { renderCoverageChoice(host, data, geom); window.GeoAIDrawUI?.setAnalyzing(false); return; }
@@ -306,7 +306,7 @@
       map.getContainer().classList.remove('is-correction-pick'); button.textContent = 'เลือกจุดบนแผนที่'; button.classList.remove('is-active');
       if (!current || !contains(current.geometry, event.latlng)) { toast('ตำแหน่งนี้อยู่นอกพื้นที่ที่วิเคราะห์', 'info'); return; }
       try {
-        const response = await fetch(`/api/map/identify?lon=${event.latlng.lng}&lat=${event.latlng.lat}`), data = await response.json(); if (!response.ok || !data.feature) throw Error('identify unavailable');
+        const response = await fetch(window.GeoAIApp.url(`api/map/identify?lon=${event.latlng.lng}&lat=${event.latlng.lat}`)), data = await response.json(); if (!response.ok || !data.feature) throw Error('identify unavailable');
         correctionPoint = event.latlng; correctionFeature = data.feature; correctionRecord = null; renderFeature(section, data);
       } catch (_) { toast('ไม่พบข้อมูลจำแนก ณ ตำแหน่งนี้', 'info'); }
     });
@@ -323,7 +323,7 @@
     const p = correctionFeature.properties, button = drawer.querySelector('[data-save-correction]'); button.disabled = true; button.textContent = 'กำลังบันทึก…';
     const payload = { geometry: { type: 'Point', coordinates: [correctionPoint.lng, correctionPoint.lat] }, feature_id: p.feature_id, original_class: p.class_id, corrected_class: drawer.querySelector('[data-corrected-class]').value, user_note: drawer.querySelector('[data-correction-note]').value, source_aoi_id: current.aoi_id };
     try {
-      const response = await fetch('/api/aoi/corrections', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(payload) }), data = await response.json(); if (!response.ok) throw Error('save failed');
+      const response = await fetch(window.GeoAIApp.url('api/aoi/corrections'), { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(payload) }), data = await response.json(); if (!response.ok) throw Error('save failed');
       correctionRecord = data; drawer.hidden = true; renderFeature(ensureHost().querySelector('[data-feature-detail]'), { feature: correctionFeature }); toast('บันทึกการแก้ไขแล้ว');
       const color = window.GeoAIClasses.color(data.corrected_class);
       const icon = L.divIcon({ className: 'aoi-correction-marker', html: `<span style="--correction-color:${color}" aria-hidden="true">✎</span>`, iconSize: [24, 24], iconAnchor: [12, 12] });

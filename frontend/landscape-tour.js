@@ -66,7 +66,7 @@ Dependency สำคัญ: backend API และ class schema
     description.textContent = content.description;
     note.textContent = content.note;
     if (tileIds[index]) {
-      detailImage.src = `/assets/${tileIds[index]}/rgb`;
+      detailImage.src = window.GeoAIApp.url(`assets/${tileIds[index]}/rgb`);
       detailImage.alt = `PlanetScope RGB ของ ${tileIds[index]}`;
       detailCaption.textContent = tileIds[index];
     }

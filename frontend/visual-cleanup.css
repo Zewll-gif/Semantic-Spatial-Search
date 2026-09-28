@@ -10,7 +10,7 @@ Dependency สำคัญ: backend API และ class schema
 /* Quiet visual hierarchy, with the real aligned Full AOI RGB/prediction pair. */
 .experience-hero::after{display:none}
 .discover-copy::before,.compare-guide{display:none!important}
-.hero-semantic{position:absolute;inset:-4%;z-index:-2;background:url('/aoi/a7t_full_aoi_canonical.png?v=a7t-palette-1') center 43%/cover no-repeat;transform:scale(1.04);pointer-events:none;opacity:0;mask-image:radial-gradient(circle 190px at var(--reveal-x,70%) var(--reveal-y,50%),#000 20%,transparent 100%);-webkit-mask-image:radial-gradient(circle 190px at var(--reveal-x,70%) var(--reveal-y,50%),#000 20%,transparent 100%);transition:opacity .35s}
+.hero-semantic{position:absolute;inset:-4%;z-index:-2;background:url('aoi/a7t_full_aoi_canonical.png?v=a7t-palette-1') center 43%/cover no-repeat;transform:scale(1.04);pointer-events:none;opacity:0;mask-image:radial-gradient(circle 190px at var(--reveal-x,70%) var(--reveal-y,50%),#000 20%,transparent 100%);-webkit-mask-image:radial-gradient(circle 190px at var(--reveal-x,70%) var(--reveal-y,50%),#000 20%,transparent 100%);transition:opacity .35s}
 .leaflet-image-layer[src*="a7t_full_aoi_canonical"],.compare-prediction{image-rendering:pixelated}
 .compact-legend{transform:translateY(-60px);z-index:1100}
 @media(max-width:700px){.compact-legend{transform:translateY(-175px);z-index:1100;max-width:calc(100vw - 24px)}}

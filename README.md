@@ -79,3 +79,13 @@ Invoke-RestMethod http://127.0.0.1:8795/api/system/model-info
 
 See [docs/SELF_CONTAINED_PROJECT_AUDIT.md](docs/SELF_CONTAINED_PROJECT_AUDIT.md)
 for the packaging inventory, hashes, validation evidence and limitations.
+
+## Reverse proxy subpath
+
+The same frontend supports local `/` and a reverse-proxy prefix such as
+`/smt/`. It uses a document-relative base plus the centralized
+`window.GeoAIApp.url(...)` resolver; it does not require root-domain Nginx
+locations for application assets or APIs.
+
+See [docs/SUBPATH_DEPLOYMENT.md](docs/SUBPATH_DEPLOYMENT.md) for Docker rebuild,
+Nginx-compatible behavior, curl checks, and the local subpath QA workflow.

@@ -1,4 +1,4 @@
-import * as maplibregl from '/vendor/maplibre/maplibre-gl.mjs?v=tour-mime-20260919';
+import * as maplibregl from './vendor/maplibre/maplibre-gl.mjs?v=tour-mime-20260919';
 
 const section = document.getElementById('guidedTour');
 const mapNode = document.getElementById('tourMap');
@@ -158,8 +158,8 @@ function createMap(maskManifest) {
     style: {
       version: 8,
       sources: {
-        rgb: { type: 'raster', tiles: ['/terrain/tiles/rgb/{z}/{x}/{y}.png'], tileSize: 256, minzoom: 10, maxzoom: 15, bounds: sourceBounds },
-        dem: { type: 'raster-dem', tiles: ['/terrain/tiles/dem/{z}/{x}/{y}.png'], tileSize: 256, minzoom: 10, maxzoom: 14, bounds: sourceBounds, encoding: 'terrarium' },
+        rgb: { type: 'raster', tiles: [window.GeoAIApp.url('terrain/tiles/rgb/{z}/{x}/{y}.png')], tileSize: 256, minzoom: 10, maxzoom: 15, bounds: sourceBounds },
+        dem: { type: 'raster-dem', tiles: [window.GeoAIApp.url('terrain/tiles/dem/{z}/{x}/{y}.png')], tileSize: 256, minzoom: 10, maxzoom: 14, bounds: sourceBounds, encoding: 'terrarium' },
       },
       layers: [{ id: 'tour-rgb', type: 'raster', source: 'rgb', paint: { 'raster-fade-duration': 0 } }],
     },
@@ -174,9 +174,9 @@ function createMap(maskManifest) {
       const code = item.class_id;
       const exemplar = maskManifest.scenes[code];
       if (!exemplar || exemplar.color.toUpperCase() !== window.GeoAIClasses.color(code).toUpperCase()) throw new Error(`Tour mask palette mismatch: ${code}`);
-      map.addSource(`tour-mask-${code}`, { type: 'image', url: `${exemplar.file}?v=${exemplar.sha256.slice(0, 12)}`, coordinates: exemplar.coordinates_maplibre });
+      map.addSource(`tour-mask-${code}`, { type: 'image', url: window.GeoAIApp.url(`${exemplar.file}?v=${exemplar.sha256.slice(0, 12)}`), coordinates: exemplar.coordinates_maplibre });
       if (code === 'R6' && exemplar.halo_file) {
-        map.addSource('tour-halo-R6', { type: 'image', url: `${exemplar.halo_file}?v=${exemplar.halo_sha256.slice(0, 12)}`, coordinates: exemplar.coordinates_maplibre });
+        map.addSource('tour-halo-R6', { type: 'image', url: window.GeoAIApp.url(`${exemplar.halo_file}?v=${exemplar.halo_sha256.slice(0, 12)}`), coordinates: exemplar.coordinates_maplibre });
         map.addLayer({ id: 'tour-halo-R6', type: 'raster', source: 'tour-halo-R6', paint: { 'raster-opacity': 0, 'raster-fade-duration': 0, 'raster-resampling': 'nearest' } });
       }
       map.addLayer({ id: `tour-mask-${code}`, type: 'raster', source: `tour-mask-${code}`, paint: { 'raster-opacity': 0, 'raster-fade-duration': 0, 'raster-resampling': 'nearest' } });
@@ -217,7 +217,7 @@ async function init() {
   try {
     await window.GeoAIClasses.ready;
     const [locationsResponse, manifestResponse] = await Promise.all([
-      fetch('/terrain/class_tour_locations.json'), fetch('/terrain/exemplars/manifest.json'),
+      fetch(window.GeoAIApp.url('terrain/class_tour_locations.json')), fetch(window.GeoAIApp.url('terrain/exemplars/manifest.json')),
     ]);
     if (!locationsResponse.ok || !manifestResponse.ok) throw new Error('Tour source artifacts are unavailable');
     locations = await locationsResponse.json();

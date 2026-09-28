@@ -281,7 +281,7 @@ Dependency สำคัญ: backend API และ class schema
       more.addEventListener('click',async()=>{
         more.disabled=true; setText(more,'กำลังโหลดพื้นที่เพิ่มเติม…');
         try {
-          const response=await fetch('/api/spatial/search',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({class_id:spatial.source_class_id,bbox:window.selectedBbox||null,limit:20,offset:shown})});
+          const response=await fetch(window.GeoAIApp.url('api/spatial/search'),{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({class_id:spatial.source_class_id,bbox:window.selectedBbox||null,limit:20,offset:shown})});
           if(!response.ok) throw new Error(`HTTP ${response.status}`);
           const page=await response.json(); if(currentRequest!==requestNumber)return;
           const next=page.geojson?.features||[];
@@ -363,7 +363,7 @@ Dependency สำคัญ: backend API และ class schema
       const providerControl=byId('llmProviderControl'),providerSelect=byId('llmProviderSelect');
       const payload={query:text,bbox:window.selectedBbox||null,geometry:window.selectedGeometry||null,limit:20,history:conversationHistory.slice(-6)};
       if(providerControl&&!providerControl.hidden&&providerSelect)payload.provider=providerSelect.value;
-      const response=await fetch('/api/agent/query',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(payload),signal:activeRequest.signal});
+      const response=await fetch(window.GeoAIApp.url('api/agent/query'),{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(payload),signal:activeRequest.signal});
       const data=await response.json(); if(!response.ok)throw new Error(data.detail?.message||'ระบบยังไม่พร้อมตอบคำถามนี้');
       if(own!==requestNumber)return;
       render(data);
@@ -391,7 +391,7 @@ Dependency สำคัญ: backend API และ class schema
       try{
         const params=new URLSearchParams({lon:String(event.latlng.lng),lat:String(event.latlng.lat)});
         if(activeSearchClass)params.set('class_id',activeSearchClass);
-        const response=await fetch(`/api/map/identify?${params}`,{signal:identifyRequest.signal});
+        const response=await fetch(window.GeoAIApp.url(`api/map/identify?${params}`),{signal:identifyRequest.signal});
         if(!response.ok)return;
         const data=await response.json();if(!data.feature)return;
         const id=data.feature.properties?.feature_id??data.feature.id;

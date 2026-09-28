@@ -6,7 +6,7 @@
   "derived_only": true,
   "scenes": {
     "R1": {
-      "file": "/terrain/exemplars/R1.png",
+      "file": "terrain/exemplars/R1.png",
       "sha256": "26a2f1824c93327c3134dc56fcb4df0cc38ad8c82e44bd55409816c162c61992",
       "color": "#E53935",
       "class_value": 1,
@@ -46,7 +46,7 @@
       "half_size_m": 1050
     },
     "R2": {
-      "file": "/terrain/exemplars/R2.png",
+      "file": "terrain/exemplars/R2.png",
       "sha256": "51edc61cff2e64aa33e6913ba62263badb92e247dbc88c237a1cebe0899488af",
       "color": "#FF9800",
       "class_value": 2,
@@ -86,7 +86,7 @@
       "half_size_m": 1350
     },
     "R3": {
-      "file": "/terrain/exemplars/R3.png",
+      "file": "terrain/exemplars/R3.png",
       "sha256": "c2a01365f79eb27e90a0ca63303c3b6dc1e411eca9c78245019e1ce6a97949a7",
       "color": "#2E7D32",
       "class_value": 3,
@@ -126,7 +126,7 @@
       "half_size_m": 1050
     },
     "R4": {
-      "file": "/terrain/exemplars/R4.png",
+      "file": "terrain/exemplars/R4.png",
       "sha256": "0973002257cb739ce1865b21d9601dc882039eb942a7e2884bfcb782e58fef6e",
       "color": "#1976D2",
       "class_value": 4,
@@ -166,7 +166,7 @@
       "half_size_m": 900
     },
     "R5": {
-      "file": "/terrain/exemplars/R5.png",
+      "file": "terrain/exemplars/R5.png",
       "sha256": "69744262905f42903690b22aede76f23420b03a11c5105090c45289709b7b5de",
       "color": "#8BC34A",
       "class_value": 5,
@@ -206,7 +206,7 @@
       "half_size_m": 850
     },
     "R6": {
-      "file": "/terrain/exemplars/R6.png",
+      "file": "terrain/exemplars/R6.png",
       "sha256": "4b9fdd918bf33070d236eb812e926e8712e181049a357ebf59bc4e2f6a74b355",
       "color": "#795548",
       "class_value": 6,
@@ -244,7 +244,7 @@
       "pixels_total": 1048576,
       "alpha_max": 215,
       "half_size_m": 700,
-      "halo_file": "/terrain/exemplars/R6_halo.png",
+      "halo_file": "terrain/exemplars/R6_halo.png",
       "halo_sha256": "d9fa5063afdde3c5268726c793a34e67097a693fa032ce74e9d33fada408686d",
       "halo_is_prediction": false
     }

@@ -78,12 +78,12 @@
     if (!map.getPane('roiMask')) { map.createPane('roiMask'); map.getPane('roiMask').style.zIndex = '370'; }
     group = L.layerGroup().addTo(map);
     const params = new URLSearchParams({west: bbox[0], south: bbox[1], east: bbox[2], north: bbox[3], v: window.GeoAIClasses.version()});
-    preview = L.imageOverlay(`/api/roi/preview?${params}`, bounds(bbox), {opacity, pane: 'roiPreview', interactive: false, className: 'roi-categorical-preview'}).addTo(group);
+    preview = L.imageOverlay(window.GeoAIApp.url(`api/roi/preview?${params}`), bounds(bbox), {opacity, pane: 'roiPreview', interactive: false, className: 'roi-categorical-preview'}).addTo(group);
     addDimmer(bbox); refreshPreview();
     const root = control?.getContainer(); root?.classList.add('is-visible');
     controller = new AbortController();
     try {
-      const response = await fetch('/api/roi/insight', {method: 'POST', headers: {'content-type': 'application/json'}, body: JSON.stringify({bbox}), signal: controller.signal});
+      const response = await fetch(window.GeoAIApp.url('api/roi/insight'), {method: 'POST', headers: {'content-type':'application/json'}, body: JSON.stringify({bbox}), signal: controller.signal});
       if (!response.ok) throw new Error('ROI insight unavailable');
       renderInsight(await response.json());
     } catch (error) {

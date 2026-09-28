@@ -12,7 +12,7 @@ Dependency สำคัญ: backend API และ class schema
 html{height:auto;overflow-y:auto;scroll-behavior:smooth;scroll-padding-top:18px}body{height:auto;overflow:visible;background:var(--exp-cream)}
 html{scroll-snap-type:y proximity}.experience-hero,.experience-discover,.workspace-shell{scroll-snap-align:start}
 .experience-hero{position:relative;min-height:100svh;overflow:hidden;isolation:isolate;background:#1d2e2e;color:#fff}
-.hero-imagery{position:absolute;inset:-4%;z-index:-2;background:url('/aoi/full_aoi_rgb.png') center 43%/cover no-repeat;transform:scale(1.04);animation:hero-arrive 1.8s cubic-bezier(.19,1,.22,1) both;will-change:transform}
+.hero-imagery{position:absolute;inset:-4%;z-index:-2;background:url('aoi/full_aoi_rgb.png') center 43%/cover no-repeat;transform:scale(1.04);animation:hero-arrive 1.8s cubic-bezier(.19,1,.22,1) both;will-change:transform}
 .hero-shade{position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(8,21,21,.84) 0%,rgba(8,22,20,.56) 42%,rgba(8,24,20,.14) 78%),linear-gradient(0deg,rgba(5,18,18,.82),transparent 36%,rgba(5,17,17,.34))}
 .experience-hero::after{content:"";position:absolute;inset:0;z-index:-1;opacity:.13;background-image:linear-gradient(90deg,transparent calc(25% - 1px),#fff 25%,transparent calc(25% + 1px)),linear-gradient(0deg,transparent calc(50% - 1px),#fff 50%,transparent calc(50% + 1px));pointer-events:none}
 .hero-nav{position:relative;z-index:2;height:84px;margin:0 clamp(18px,4vw,68px);display:flex;align-items:center;justify-content:space-between;gap:24px;border-bottom:1px solid var(--exp-line)}

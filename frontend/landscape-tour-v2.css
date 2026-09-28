@@ -9,7 +9,7 @@ body.journey-ready .experience-hero{z-index:1}
 .journey-scene .maplibregl-control-container{display:none}
 .guided-tour{--tour-reveal-opacity:0;position:relative;z-index:1;height:100svh;min-height:620px;background:#14211d;color:#fff;isolation:isolate;overflow:hidden}
 .tour-sticky,.tour-bridge,.tour-atmosphere,.tour-vignette{position:absolute;inset:0}
-.tour-bridge{z-index:1;background:linear-gradient(90deg,rgba(5,20,17,.75),transparent 75%),url('/aoi/full_aoi_rgb.png') center 43%/cover no-repeat;pointer-events:none}
+.tour-bridge{z-index:1;background:linear-gradient(90deg,rgba(5,20,17,.75),transparent 75%),url('aoi/full_aoi_rgb.png') center 43%/cover no-repeat;pointer-events:none}
 .tour-atmosphere{z-index:2;pointer-events:none;background:radial-gradient(ellipse 80% 60% at 65% 14%,rgba(224,240,230,.1),transparent 65%)}
 .tour-vignette{z-index:3;pointer-events:none;background:linear-gradient(90deg,rgba(8,22,18,.78),rgba(8,22,18,.25) 52%,transparent 75%),linear-gradient(0deg,rgba(8,22,18,.68),transparent 37%)}
 .tour-story{position:absolute;z-index:5;left:clamp(26px,7vw,126px);top:50%;width:min(520px,42vw);transform:translateY(-50%);text-shadow:0 2px 26px rgba(0,0,0,.35)}
