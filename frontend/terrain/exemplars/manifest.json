@@ -1,0 +1,252 @@
+{
+  "source_model": "A7_RGBN_REVISED7_TVERSKY",
+  "source_raster": "data/rasters/a7t/A7_RGBN_REVISED7_TVERSKY_FULL_AOI.tif",
+  "source_sha256": "c49da60dfc9648f83a3d4cc4cf5e233c989bc71993d92aac334163edffd0bb03",
+  "method": "Nearest-neighbor sample of frozen categorical raster; display-only connected-component size filter; only exact class pixels colored; visual alpha tapers at crop edge. R6 neutral halo is a separate presentation-only layer.",
+  "derived_only": true,
+  "scenes": {
+    "R1": {
+      "file": "/terrain/exemplars/R1.png",
+      "sha256": "26a2f1824c93327c3134dc56fcb4df0cc38ad8c82e44bd55409816c162c61992",
+      "color": "#E53935",
+      "class_value": 1,
+      "center_lonlat": [
+        99.0522031412737,
+        18.873934613422307
+      ],
+      "bounds_lonlat": [
+        99.0422319941545,
+        18.864441851231955,
+        99.06217541053267,
+        18.88342683485636
+      ],
+      "coordinates_maplibre": [
+        [
+          99.0422319941545,
+          18.88342683485636
+        ],
+        [
+          99.06217541053267,
+          18.88342683485636
+        ],
+        [
+          99.06217541053267,
+          18.864441851231955
+        ],
+        [
+          99.0422319941545,
+          18.864441851231955
+        ]
+      ],
+      "pixels_matching_class": 287898,
+      "pixels_before_display_filter": 291255,
+      "min_component_pixels": 70,
+      "pixels_total": 1048576,
+      "alpha_max": 145,
+      "half_size_m": 1050
+    },
+    "R2": {
+      "file": "/terrain/exemplars/R2.png",
+      "sha256": "51edc61cff2e64aa33e6913ba62263badb92e247dbc88c237a1cebe0899488af",
+      "color": "#FF9800",
+      "class_value": 2,
+      "center_lonlat": [
+        98.9906671106326,
+        18.877873148520592
+      ],
+      "bounds_lonlat": [
+        98.97784821263838,
+        18.865671020473123,
+        99.00348465760008,
+        18.89007441101955
+      ],
+      "coordinates_maplibre": [
+        [
+          98.97784821263838,
+          18.89007441101955
+        ],
+        [
+          99.00348465760008,
+          18.89007441101955
+        ],
+        [
+          99.00348465760008,
+          18.865671020473123
+        ],
+        [
+          98.97784821263838,
+          18.865671020473123
+        ]
+      ],
+      "pixels_matching_class": 508228,
+      "pixels_before_display_filter": 509063,
+      "min_component_pixels": 100,
+      "pixels_total": 1048576,
+      "alpha_max": 145,
+      "half_size_m": 1350
+    },
+    "R3": {
+      "file": "/terrain/exemplars/R3.png",
+      "sha256": "c2a01365f79eb27e90a0ca63303c3b6dc1e411eca9c78245019e1ce6a97949a7",
+      "color": "#2E7D32",
+      "class_value": 3,
+      "center_lonlat": [
+        98.952081,
+        18.783291
+      ],
+      "bounds_lonlat": [
+        98.9421143322631,
+        18.77379838768672,
+        98.96204655198825,
+        18.79278307409931
+      ],
+      "coordinates_maplibre": [
+        [
+          98.9421143322631,
+          18.79278307409931
+        ],
+        [
+          98.96204655198825,
+          18.79278307409931
+        ],
+        [
+          98.96204655198825,
+          18.77379838768672
+        ],
+        [
+          98.9421143322631,
+          18.77379838768672
+        ]
+      ],
+      "pixels_matching_class": 491452,
+      "pixels_before_display_filter": 496968,
+      "min_component_pixels": 90,
+      "pixels_total": 1048576,
+      "alpha_max": 140,
+      "half_size_m": 1050
+    },
+    "R4": {
+      "file": "/terrain/exemplars/R4.png",
+      "sha256": "0973002257cb739ce1865b21d9601dc882039eb942a7e2884bfcb782e58fef6e",
+      "color": "#1976D2",
+      "class_value": 4,
+      "center_lonlat": [
+        98.97403093433003,
+        18.89199764694215
+      ],
+      "bounds_lonlat": [
+        98.96548368892866,
+        18.883862242852025,
+        98.98257735436401,
+        18.900132652218147
+      ],
+      "coordinates_maplibre": [
+        [
+          98.96548368892866,
+          18.900132652218147
+        ],
+        [
+          98.98257735436401,
+          18.900132652218147
+        ],
+        [
+          98.98257735436401,
+          18.883862242852025
+        ],
+        [
+          98.96548368892866,
+          18.883862242852025
+        ]
+      ],
+      "pixels_matching_class": 38258,
+      "pixels_before_display_filter": 38286,
+      "min_component_pixels": 18,
+      "pixels_total": 1048576,
+      "alpha_max": 200,
+      "half_size_m": 900
+    },
+    "R5": {
+      "file": "/terrain/exemplars/R5.png",
+      "sha256": "69744262905f42903690b22aede76f23420b03a11c5105090c45289709b7b5de",
+      "color": "#8BC34A",
+      "class_value": 5,
+      "center_lonlat": [
+        99.07201904456602,
+        18.68830775890248
+      ],
+      "bounds_lonlat": [
+        99.06395504032251,
+        18.680622206308566,
+        99.0800837756126,
+        18.695992961616152
+      ],
+      "coordinates_maplibre": [
+        [
+          99.06395504032251,
+          18.695992961616152
+        ],
+        [
+          99.0800837756126,
+          18.695992961616152
+        ],
+        [
+          99.0800837756126,
+          18.680622206308566
+        ],
+        [
+          99.06395504032251,
+          18.680622206308566
+        ]
+      ],
+      "pixels_matching_class": 492798,
+      "pixels_before_display_filter": 494382,
+      "min_component_pixels": 90,
+      "pixels_total": 1048576,
+      "alpha_max": 135,
+      "half_size_m": 850
+    },
+    "R6": {
+      "file": "/terrain/exemplars/R6.png",
+      "sha256": "4b9fdd918bf33070d236eb812e926e8712e181049a357ebf59bc4e2f6a74b355",
+      "color": "#795548",
+      "class_value": 6,
+      "center_lonlat": [
+        99.07414005244185,
+        18.724205728151937
+      ],
+      "bounds_lonlat": [
+        99.06749757138657,
+        18.7178764193393,
+        99.08078302753661,
+        18.73053479923971
+      ],
+      "coordinates_maplibre": [
+        [
+          99.06749757138657,
+          18.73053479923971
+        ],
+        [
+          99.08078302753661,
+          18.73053479923971
+        ],
+        [
+          99.08078302753661,
+          18.7178764193393
+        ],
+        [
+          99.06749757138657,
+          18.7178764193393
+        ]
+      ],
+      "pixels_matching_class": 123124,
+      "pixels_before_display_filter": 123161,
+      "min_component_pixels": 70,
+      "pixels_total": 1048576,
+      "alpha_max": 215,
+      "half_size_m": 700,
+      "halo_file": "/terrain/exemplars/R6_halo.png",
+      "halo_sha256": "d9fa5063afdde3c5268726c793a34e67097a693fa032ce74e9d33fada408686d",
+      "halo_is_prediction": false
+    }
+  }
+}

@@ -1,0 +1,9 @@
+backend/.env*
+!backend/.env.example
+.env
+qa/
+exports/
+cache/sentinel2/
+**/__pycache__/
+*.pyc
+*.pyo

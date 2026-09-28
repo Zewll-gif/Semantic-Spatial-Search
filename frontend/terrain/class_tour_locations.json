@@ -1,0 +1,163 @@
+[
+  {
+    "class_id": "R1",
+    "canonical_name": "Built-up / Impervious",
+    "thai_name": "สิ่งปลูกสร้างและพื้นผิวทึบน้ำ",
+    "camera_seed_source": "data/vectors/A7_T_FULL_AOI_POLYGONS_CLEAN.gpkg",
+    "display_mask_source": "data/rasters/a7t/A7_RGBN_REVISED7_TVERSKY_FULL_AOI.tif",
+    "representative_feature_ids": [
+      32619
+    ],
+    "area_ha": 83.0421,
+    "center_lonlat": [
+      99.0522031412737,
+      18.873934613422307
+    ],
+    "bounds": [
+      99.03996795650849,
+      18.865166448339462,
+      99.06375598945513,
+      18.882702198115776
+    ],
+    "camera": {
+      "zoom": 14.35,
+      "pitch": 55,
+      "bearing": -13
+    },
+    "selection_reason": "Continuous built-up footprint well inside the AOI; avoids the east-edge terrain void."
+  },
+  {
+    "class_id": "R2",
+    "canonical_name": "Agricultural Land / Cropland",
+    "thai_name": "พื้นที่เกษตรกรรม",
+    "camera_seed_source": "data/vectors/A7_T_FULL_AOI_POLYGONS_CLEAN.gpkg",
+    "display_mask_source": "data/rasters/a7t/A7_RGBN_REVISED7_TVERSKY_FULL_AOI.tif",
+    "representative_feature_ids": [
+      38044
+    ],
+    "area_ha": 411.075,
+    "center_lonlat": [
+      98.9906671106326,
+      18.877873148520592
+    ],
+    "bounds": [
+      98.98064361044496,
+      18.85633074410911,
+      99.01368302250162,
+      18.89938734821983
+    ],
+    "camera": {
+      "zoom": 14.1,
+      "pitch": 48,
+      "bearing": 8
+    },
+    "selection_reason": "Broad interior cropland parcel pattern with landscape context on all sides."
+  },
+  {
+    "class_id": "R3",
+    "canonical_name": "Tree / Woody Cover",
+    "thai_name": "ไม้ยืนต้นและพืชพรรณเนื้อไม้",
+    "camera_seed_source": "data/rasters/a7t/A7_RGBN_REVISED7_TVERSKY_FULL_AOI.tif",
+    "display_mask_source": "data/rasters/a7t/A7_RGBN_REVISED7_TVERSKY_FULL_AOI.tif",
+    "representative_feature_ids": [],
+    "area_ha": null,
+    "center_lonlat": [
+      98.952081,
+      18.783291
+    ],
+    "bounds": [
+      98.9421143322631,
+      18.7737983876867,
+      98.9620465519883,
+      18.7927830740993
+    ],
+    "camera": {
+      "zoom": 14.0,
+      "pitch": 64,
+      "bearing": -24
+    },
+    "dem_elevation_m_at_center": 360,
+    "selection_reason": "A7-T raster class R3 at the mountain fringe; a 2.1-km raster window contains both woody and adjacent classes, making the actual class boundary visible. Display mask comes from the frozen Full-AOI categorical raster."
+  },
+  {
+    "class_id": "R4",
+    "canonical_name": "Water",
+    "thai_name": "แหล่งน้ำ",
+    "camera_seed_source": "data/vectors/A7_T_FULL_AOI_POLYGONS_CLEAN.gpkg",
+    "display_mask_source": "data/rasters/a7t/A7_RGBN_REVISED7_TVERSKY_FULL_AOI.tif",
+    "representative_feature_ids": [
+      31738
+    ],
+    "area_ha": 31.0446,
+    "center_lonlat": [
+      98.97403093433003,
+      18.89199764694215
+    ],
+    "bounds": [
+      98.969905086016,
+      18.8667137729148,
+      98.97852838410554,
+      18.917254292069
+    ],
+    "camera": {
+      "zoom": 14.5,
+      "pitch": 42,
+      "bearing": -5
+    },
+    "selection_reason": "Long connected river segment; camera follows its north–south direction."
+  },
+  {
+    "class_id": "R5",
+    "canonical_name": "Grassland / Herbaceous",
+    "thai_name": "หญ้าและพืชล้มลุก",
+    "camera_seed_source": "data/vectors/A7_T_FULL_AOI_POLYGONS_CLEAN.gpkg",
+    "display_mask_source": "data/rasters/a7t/A7_RGBN_REVISED7_TVERSKY_FULL_AOI.tif",
+    "representative_feature_ids": [
+      142463
+    ],
+    "area_ha": 79.0452,
+    "center_lonlat": [
+      99.07201904456602,
+      18.68830775890248
+    ],
+    "bounds": [
+      99.05830332983729,
+      18.6815204745465,
+      99.0746679535327,
+      18.695071650399527
+    ],
+    "camera": {
+      "zoom": 14.7,
+      "pitch": 47,
+      "bearing": 12
+    },
+    "selection_reason": "Open herbaceous segment in the southern AOI with visible landscape context."
+  },
+  {
+    "class_id": "R6",
+    "canonical_name": "Bare Ground",
+    "thai_name": "ดินเปลือย",
+    "camera_seed_source": "data/vectors/A7_T_FULL_AOI_POLYGONS_CLEAN.gpkg",
+    "display_mask_source": "data/rasters/a7t/A7_RGBN_REVISED7_TVERSKY_FULL_AOI.tif",
+    "representative_feature_ids": [
+      115084
+    ],
+    "area_ha": 19.4967,
+    "center_lonlat": [
+      99.07414005244185,
+      18.724205728151937
+    ],
+    "bounds": [
+      99.06964247283948,
+      18.720858893880774,
+      99.07906467247277,
+      18.727552272919418
+    ],
+    "camera": {
+      "zoom": 15.0,
+      "pitch": 53,
+      "bearing": -8
+    },
+    "selection_reason": "Substantial exposed-ground segment, avoiding tiny isolated pixels."
+  }
+]

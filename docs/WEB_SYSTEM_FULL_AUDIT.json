@@ -1,0 +1,313 @@
+{
+  "audit": {
+    "title": "GeoAI Explorer Full Technical Audit",
+    "date": "2026-09-21",
+    "timezone": "Asia/Bangkok",
+    "mode": "read_only",
+    "scope": [
+      "live runtime and source",
+      "publish/staging runtime and source",
+      "frontend and backend",
+      "APIs and data stores",
+      "GIS calculations and CRS",
+      "Drawn AOI and Sentinel-2",
+      "agent, RAG, trace and reliability",
+      "deployment, tests, risks and limitations"
+    ],
+    "prohibited_actions_performed": []
+  },
+  "deployments": {
+    "live": {
+      "url": "http://127.0.0.1:8795/#explore",
+      "root": "D:\\499_Thesis_Final\\02_WEB_SYSTEM",
+      "pid": 4744,
+      "python": "C:\\Users\\Admin\\anaconda3\\envs\\geoai\\python.exe",
+      "command": "python -m uvicorn main:app --host 127.0.0.1 --port 8795",
+      "working_directory": {
+        "value": "D:\\499_Thesis_Final\\02_WEB_SYSTEM\\app\\backend",
+        "status": "inferred_not_directly_observed"
+      }
+    },
+    "staging": {
+      "url": "http://127.0.0.1:8802/#explore",
+      "root": "D:\\499_2\\499_Thesis_Final_PUBLISH\\02_WEB_SYSTEM",
+      "pid": 36764,
+      "python": "C:\\Users\\Admin\\anaconda3\\envs\\geoai\\python.exe",
+      "command": "python -m uvicorn main:app --host 127.0.0.1 --port 8802",
+      "working_directory": {
+        "value": "D:\\499_2\\499_Thesis_Final_PUBLISH\\02_WEB_SYSTEM\\app\\backend",
+        "status": "inferred_not_directly_observed"
+      }
+    },
+    "parity": {
+      "compared_code_config_files": 69,
+      "matching_files": 69,
+      "html_bytes": 25594,
+      "html_sha256": "802BF8ACA92816734686DC2E7E32C0D623CCC9F90BEF59E42B633F178555195D"
+    }
+  },
+  "runtime_status": {
+    "api_operation_count": 59,
+    "model": "A7_RGBN_REVISED7_TVERSKY",
+    "agent_route_available": true,
+    "openai_planner_enabled": false,
+    "openai_key_configured": false,
+    "database_mode": "gpkg_fallback",
+    "postgis_configured": false,
+    "postgis_connected": false,
+    "postgis_reason": "dsn_missing",
+    "cdse_environment_names_present": true,
+    "test40_ground_truth_accessed": false
+  },
+  "technology": {
+    "python": "3.11.15",
+    "fastapi": "0.141.1",
+    "uvicorn": "0.46.0",
+    "pydantic": "2.13.5",
+    "numpy": "2.4.4",
+    "rasterio": "1.4.4",
+    "shapely": "2.1.2",
+    "geopandas": "1.1.3",
+    "pyproj": "3.7.2",
+    "psycopg2_binary": "2.9.13",
+    "httpx": "0.28.1",
+    "boto3": "1.43.98",
+    "pillow": "12.2.0",
+    "pyogrio": "0.12.1",
+    "leaflet": "1.9.4",
+    "maplibre": "6.10.0",
+    "gsap": "3.15.0",
+    "frontend": "static HTML/CSS/vanilla JavaScript"
+  },
+  "aoi": {
+    "projected_crs": "EPSG:32647",
+    "display_crs": "EPSG:4326",
+    "wgs84_bbox": {
+      "west": 98.89023907363709,
+      "south": 18.66529982248273,
+      "east": 99.12675969138141,
+      "north": 18.9176840206757
+    }
+  },
+  "rasters": {
+    "planetscope_rgbn": {
+      "width": 8302,
+      "height": 9308,
+      "bands": 4,
+      "dtype": "uint16",
+      "nodata": 0,
+      "resolution_m": 3,
+      "crs": "EPSG:32647",
+      "source_band_order": ["B", "G", "R", "NIR"],
+      "display_bands": [3, 2, 1]
+    },
+    "a7t_full_aoi": {
+      "width": 8302,
+      "height": 9308,
+      "bands": 1,
+      "dtype": "uint8",
+      "nodata": 0,
+      "resolution_m": 3,
+      "crs": "EPSG:32647",
+      "encoding": "0=NoData; 1..7=R1..R7"
+    },
+    "ndvi": {
+      "width": 8302,
+      "height": 9308,
+      "dtype": "float32",
+      "nodata": -9999,
+      "resolution_m": 3,
+      "crs": "EPSG:32647"
+    },
+    "ndwi": {
+      "width": 8302,
+      "height": 9308,
+      "dtype": "float32",
+      "nodata": -9999,
+      "resolution_m": 3,
+      "crs": "EPSG:32647"
+    },
+    "cop30_dsm": {
+      "width": 831,
+      "height": 931,
+      "dtype": "float32",
+      "nodata": -9999,
+      "resolution_m": 30,
+      "crs": "EPSG:32647",
+      "vertical_unit": "metre",
+      "vertical_reference": "EGM2008",
+      "type": "DSM_not_DTM"
+    }
+  },
+  "taxonomy": {
+    "source": "03_SHARED_DATA/FINAL_CLASS_PALETTE/revised7_palette.json",
+    "classes": [
+      {"id": "R1", "name": "Built-up / Impervious", "color": "#E53935"},
+      {"id": "R2", "name": "Agricultural Land / Cropland", "color": "#FF9800"},
+      {"id": "R3", "name": "Tree / Woody Cover", "color": "#2E7D32"},
+      {"id": "R4", "name": "Water", "color": "#1976D2"},
+      {"id": "R5", "name": "Grassland / Herbaceous", "color": "#8BC34A"},
+      {"id": "R6", "name": "Bare Ground", "color": "#795548"},
+      {"id": "R7", "name": "Uncertain / Cloud", "color": "#9E9E9E"}
+    ]
+  },
+  "vector_store": {
+    "active_mode": "GeoPackage",
+    "file": "A7_T_FULL_AOI_POLYGONS_CLEAN.gpkg",
+    "layer": "polygons",
+    "crs": "EPSG:32647",
+    "geometry": "Polygon",
+    "feature_count": 155199,
+    "rtree_present": true,
+    "class_counts": {
+      "R1": 30906,
+      "R2": 5527,
+      "R3": 65111,
+      "R4": 7840,
+      "R5": 41479,
+      "R6": 4336,
+      "R7": 0
+    },
+    "optional_postgis": {
+      "schema": "geoai_a7t",
+      "table": "landcover_polygons",
+      "srid": 32647,
+      "read_only_parameterized_allowlist": true,
+      "active": false
+    }
+  },
+  "human_corrections": {
+    "store": "app/data/human_corrections.sqlite",
+    "row_count": 0,
+    "review_status_default": "pending",
+    "mutates_prediction": false
+  },
+  "drawn_aoi": {
+    "input_crs": "EPSG:4326",
+    "analysis_crs": "EPSG:32647",
+    "geometry_types": ["Polygon", "MultiPolygon"],
+    "max_vertices": 5000,
+    "max_area_km2": 250,
+    "categorical_all_touched": false,
+    "a7t_pixel_area_m2": 9,
+    "area_rai_formula": "pixel_count * pixel_area_m2 / 1600",
+    "percentage_denominator": "valid_class_pixels",
+    "preview_max_dimension_px": 2048
+  },
+  "sentinel2": {
+    "stac_url": "https://stac.dataspace.copernicus.eu/v1",
+    "collection": "sentinel-2-l2a",
+    "bands": ["B02", "B03", "B04", "B08", "SCL"],
+    "scene_score": "0.55*coverage + 0.30*(1-cloud/100) + 0.15*recency",
+    "continuous_resampling": "bilinear",
+    "scl_resampling": "nearest",
+    "cloudy_scl": [1, 3, 7, 8, 9, 10, 11],
+    "valid_scl": [2, 4, 5, 6],
+    "ndvi_formula": "(B08-B04)/(B08+B04)",
+    "ndwi_formula": "(B03-B08)/(B03+B08)",
+    "cache_schema": "sentinel2-cube-v6-main-thread-jp2",
+    "cache_files_at_audit": 7,
+    "cache_bytes_at_audit": 2758109,
+    "real_validation_evidence": {
+      "mocked": false,
+      "bbox": [99.18, 18.75, 99.20, 18.77],
+      "scene_date": "2026-03-26",
+      "scene_coverage_percent": 100.0,
+      "valid_pixels_percent": 99.2,
+      "ndvi_mean": 0.3639,
+      "ndwi_mean": -0.3653,
+      "rgb_http": 200,
+      "ndvi_http": 200,
+      "ndwi_http": 200
+    },
+    "limitation": "uncached Sentinel-2 JP2 extraction currently runs synchronously and may block the application during processing; current deployment is intended for controlled single-user research/demo use."
+  },
+  "agent": {
+    "active_router": "deterministic",
+    "modes": ["knowledge", "spatial", "mixed"],
+    "rag": "local lexical token overlap with rule boosts",
+    "vector_database": false,
+    "optional_openai_role": "structured_intent_only",
+    "optional_openai_store": false,
+    "database_rows_sent_to_llm": false,
+    "llm_executes_sql": false,
+    "fallback": "deterministic router",
+    "legacy_and_v2_surfaces_coexist": true
+  },
+  "validation_metrics": {
+    "context": "fixed VAL4 class-level reference, not polygon confidence",
+    "R1": {"iou": 0.653720, "f1": 0.790578},
+    "R2": {"iou": 0.548300, "f1": 0.707615},
+    "R3": {"iou": 0.719136, "f1": 0.836568},
+    "R4": {"iou": 0.617139, "f1": 0.763043},
+    "R5": {"iou": 0.309281, "f1": 0.472383},
+    "R6": {"iou": 0.215788, "f1": 0.354909},
+    "R7": {"iou": null, "f1": null, "note": "no fixed VAL4 support"}
+  },
+  "tests": {
+    "current_unit_suite": {"passed": 43, "failed": 0, "seconds": 36.564},
+    "drawn_aoi_external_suite": {"passed": 19, "failed": 0, "seconds": 0.396},
+    "live_browser_console_errors": 0,
+    "live_browser_console_warnings": 0,
+    "staging_browser_console_errors": 0,
+    "staging_browser_console_warnings": 0,
+    "paid_llm_calls": 0,
+    "new_uncached_sentinel2_extractions": 0,
+    "not_proven": [
+      "live PostGIS integration",
+      "public security",
+      "multi-user concurrency",
+      "load capacity",
+      "90-call paid LLM pilot"
+    ]
+  },
+  "security": {
+    "bind": "127.0.0.1",
+    "http_authentication": false,
+    "authorization": false,
+    "rate_limiting": false,
+    "cors_middleware_found": false,
+    "security_header_layer_found": false,
+    "secrets_printed_by_audit": false,
+    "current_exposure_assessment": "acceptable only for controlled localhost use"
+  },
+  "risks": [
+    {"priority": "high", "id": "AUTH", "finding": "No HTTP authentication or authorization"},
+    {"priority": "high", "id": "CORRECTION_WRITE", "finding": "Correction write route is unauthenticated"},
+    {"priority": "high", "id": "SYNC_WORK", "finding": "Heavy raster and uncached JP2 work is synchronous"},
+    {"priority": "high", "id": "IN_MEMORY_ANALYSIS", "finding": "Legacy analysis registry is process memory"},
+    {"priority": "medium", "id": "NO_RATE_LIMIT", "finding": "No endpoint rate limiting"},
+    {"priority": "medium", "id": "POSTGIS_OFF", "finding": "PostGIS implementation is inactive"},
+    {"priority": "medium", "id": "HEALTH_SEMANTICS", "finding": "Legacy health agent_enabled can be misread as LLM enabled"},
+    {"priority": "medium", "id": "API_DUPLICATION", "finding": "Legacy V1 and current V2 agent/spatial APIs coexist"},
+    {"priority": "medium", "id": "CACHE_GOVERNANCE", "finding": "Sentinel-2 cache has no observed TTL/quota/eviction service"},
+    {"priority": "medium", "id": "SECURITY_HEADERS", "finding": "No CSP/SRI/security header layer found"},
+    {"priority": "low", "id": "SCHEMA_LABEL_DRIFT", "finding": "R7 public wording differs slightly between schema endpoints"}
+  ],
+  "readiness": {
+    "controlled_single_user_demo": "ready",
+    "public_multi_user_production": "not_ready",
+    "required_before_public": [
+      "authentication and role authorization",
+      "rate limiting",
+      "asynchronous job queue and progress",
+      "persistent analysis/job state",
+      "cache quota and eviction",
+      "security headers",
+      "structured monitoring and backups",
+      "concurrency, load and security testing"
+    ]
+  },
+  "deliverables": [
+    "WEB_SYSTEM_FULL_TECHNICAL_AUDIT.md",
+    "WEB_SYSTEM_ARCHITECTURE_CURRENT.md",
+    "WEB_SYSTEM_TECH_STACK.md",
+    "WEB_SYSTEM_API_REFERENCE.md",
+    "WEB_SYSTEM_DATABASE_REFERENCE.md",
+    "WEB_SYSTEM_AGENT_REFERENCE.md",
+    "WEB_SYSTEM_DEPLOYMENT_GUIDE.md",
+    "WEB_SYSTEM_ADVISOR_QA_CHEATSHEET.md",
+    "WEB_SYSTEM_FULL_AUDIT.json",
+    "WEB_SYSTEM_ONE_PAGE_FOR_ADVISOR.md"
+  ]
+}

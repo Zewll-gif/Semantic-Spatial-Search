@@ -1,0 +1,106 @@
+<!doctype html>
+<!--
+CLEAN PROJECT HEADER
+ไฟล์: index.html
+หน้าที่: ส่วนแสดงผลและ interaction ของ GeoAI Explorer
+Input: ข้อมูลจาก API และ static assets
+Output: หน้าเว็บหรือพฤติกรรม UI
+Dependency สำคัญ: backend API และ class schema
+สิ่งที่ต้องระวัง: ห้ามเปลี่ยน taxonomy, model output, CRS หรือหน่วยโดยไม่ตรวจ audit
+-->
+<html lang="th">
+<head>
+  <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>GeoAI Explorer — Semantic Search</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="/vendor/leaflet/leaflet.css?v=1.9.4"/>
+  <link rel="stylesheet" href="/vendor/maplibre/maplibre-gl.css?v=6.10.0"/>
+<link rel="stylesheet" href="/styles.css?v=workspace"/><link rel="stylesheet" href="/aoi.css?v=workspace"/><link rel="stylesheet" href="/workspace.css?v=a7t-palette-1"/><link rel="stylesheet" href="/product.css?v=class-colored-results-20260919"/><link rel="stylesheet" href="/experience.css?v=map-integration-1"/><link rel="stylesheet" href="/cinematic.css?v=cinematic-redesign-3"/><link rel="stylesheet" href="/visual-cleanup.css?v=a7t-palette-2"/><link rel="stylesheet" href="/landscape-tour-v2.css?v=continuous-story-20260919b"/><link rel="stylesheet" href="/explore-refactor.css?v=distance-reference-20260928d"/><link rel="stylesheet" href="/drawn-aoi.css?v=external-aoi-20260921"/><link rel="stylesheet" href="/explore-map-first.css?v=20260921b"/>
+</head>
+<body>
+  <div class="journey-scene" id="journeyScene" aria-hidden="true"><div class="tour-map" id="tourMap"></div><div class="journey-shade"></div></div>
+  <div class="reading-progress" aria-hidden="true"></div>
+  <section class="experience-hero" id="storyTop" aria-label="แนะนำ GeoAI Explorer">
+    <div class="hero-imagery" aria-hidden="true"></div>
+    <div class="hero-semantic" aria-hidden="true"></div>
+    <div class="hero-shade" aria-hidden="true"></div>
+    <nav class="hero-nav" aria-label="เมนูหลัก">
+      <div class="hero-nav-links"><a href="#guidedTour">สำรวจภูมิทัศน์</a><a href="#explore">สำรวจแผนที่</a></div>
+      <a class="hero-nav-action" href="#explore">เปิดแผนที่ <span aria-hidden="true">↗</span></a>
+    </nav>
+    <div class="hero-content">
+      <div class="hero-copy reveal-item">
+        <h1>การพัฒนาระบบ <strong>Semantic Search</strong><br>สำหรับภาพถ่ายดาวเทียมความละเอียดสูง<br><em>ด้วย Deep Learning และ AI Agent</em></h1>
+        <p>สำรวจและค้นหาพื้นที่จากภาพถ่ายดาวเทียมความละเอียดสูง ด้วยการจำแนกเชิงความหมาย การวิเคราะห์เชิงพื้นที่ และ AI Agent</p>
+        <div class="hero-actions"><a class="hero-primary" href="#guidedTour">รู้จักภูมิทัศน์ <span aria-hidden="true">↓</span></a><a class="hero-text-link" href="#explore">ข้ามไปแผนที่ <span aria-hidden="true">↗</span></a></div>
+      </div>
+      <div class="hero-scene-card reveal-item" aria-label="ข้อมูลภาพ">
+        <div class="scene-index">323<span>AOI tiles</span></div>
+        <p>PlanetScope RGBN<br>Full AOI deployment</p>
+      </div>
+    </div>
+    <div class="hero-bottom"><span>เลื่อนเพื่อสำรวจภูมิทัศน์จริงของพื้นที่ศึกษา</span><a href="#guidedTour" aria-label="เลื่อนลงสู่ทัวร์ภูมิประเทศ">สำรวจภูมิทัศน์ <span aria-hidden="true">↓</span></a></div>
+  </section>
+
+  <section class="experience-discover" id="discover" aria-labelledby="discoverTitle">
+    <div class="discover-inner">
+      <div class="discover-copy reveal-item">
+        <h2 id="discoverTitle">มองพื้นที่เดิม<br><em>ผ่านอีกชั้นข้อมูล</em></h2>
+        <p>ลากเส้นแบ่งในแต่ละภาพ เพื่อดูภูมิประเทศจริงเทียบกับผลจำแนก A7‑T ในตำแหน่งเดียวกัน เลือกสำรวจพื้นที่เมือง เกษตร และภูมิทัศน์แบบผสม ก่อนเข้าสู่แผนที่เต็มพื้นที่</p>
+        <div class="discover-instruction"><span class="instruction-icon" aria-hidden="true">↔</span><span><strong>ลองลากบนภาพ</strong><small>ซ้าย PlanetScope RGB / ขวา A7‑T prediction</small></span></div>
+        <a class="discover-link" href="#explore">เปิดแผนที่โต้ตอบ <span aria-hidden="true">↗</span></a>
+        <div class="compare-guide" aria-label="วิธีเปรียบเทียบภาพ: ลากตัวแบ่งจากภาพ RGB ไปยังผลจำแนก A7-T"><div class="guide-visual"><span>RGB</span><i aria-hidden="true">↔</i><span>A7‑T</span></div><p>ลากตัวแบ่งเพื่อดูสองชั้นข้อมูล<br>ในตำแหน่งเดียวกัน</p></div>
+      </div>
+      <div class="atlas-panel reveal-item">
+        <div class="atlas-heading"><span>ลากเพื่อเปรียบเทียบภาพ ↔</span><div class="atlas-controls"><button type="button" data-atlas-direction="-1" aria-label="ดูภาพก่อนหน้า">←</button><button type="button" data-atlas-direction="1" aria-label="ดูภาพถัดไป">→</button></div></div>
+        <div class="tile-atlas" aria-label="ตัวอย่างภาพดาวเทียมและผลจำแนกพื้นที่ 4 tile">
+          <article class="tile-card"><div class="tile-card-head"><span>01 / BUILT-UP</span><strong>เมือง</strong></div><div class="compare-stage" style="--split:48%"><img class="compare-rgb" src="/assets/tile_r09_c09/rgb" alt="PlanetScope RGB tile_r09_c09 พื้นที่เมือง" loading="lazy"/><img class="compare-prediction" src="/assets/tile_r09_c09/prediction" alt="A7-T prediction tile_r09_c09 พื้นที่เมือง" loading="lazy"/><div class="compare-split" aria-hidden="true"><span>↔</span></div><input class="compare-range" type="range" min="0" max="100" value="48" aria-label="ลากเพื่อเปรียบเทียบภาพเมือง tile_r09_c09"/></div><div class="tile-card-foot"><span>tile_r09_c09</span><span>RGB <b>↔</b> A7‑T</span></div></article>
+          <article class="tile-card"><div class="tile-card-head"><span>02 / CROPLAND</span><strong>เกษตร</strong></div><div class="compare-stage" style="--split:52%"><img class="compare-rgb" src="/assets/tile_r16_c13/rgb" alt="PlanetScope RGB tile_r16_c13 พื้นที่เกษตร" loading="lazy"/><img class="compare-prediction" src="/assets/tile_r16_c13/prediction" alt="A7-T prediction tile_r16_c13 พื้นที่เกษตร" loading="lazy"/><div class="compare-split" aria-hidden="true"><span>↔</span></div><input class="compare-range" type="range" min="0" max="100" value="52" aria-label="ลากเพื่อเปรียบเทียบภาพเกษตร tile_r16_c13"/></div><div class="tile-card-foot"><span>tile_r16_c13</span><span>RGB <b>↔</b> A7‑T</span></div></article>
+          <article class="tile-card"><div class="tile-card-head"><span>03 / TRANSITION</span><strong>พื้นที่ผสม</strong></div><div class="compare-stage" style="--split:50%"><img class="compare-rgb" src="/assets/tile_r17_c14/rgb" alt="PlanetScope RGB tile_r17_c14 พื้นที่ผสม" loading="lazy"/><img class="compare-prediction" src="/assets/tile_r17_c14/prediction" alt="A7-T prediction tile_r17_c14 พื้นที่ผสม" loading="lazy"/><div class="compare-split" aria-hidden="true"><span>↔</span></div><input class="compare-range" type="range" min="0" max="100" value="50" aria-label="ลากเพื่อเปรียบเทียบภาพพื้นที่ผสม tile_r17_c14"/></div><div class="tile-card-foot"><span>tile_r17_c14</span><span>RGB <b>↔</b> A7‑T</span></div></article>
+          <article class="tile-card"><div class="tile-card-head"><span>04 / RIVERSIDE</span><strong>เมืองและลำน้ำ</strong></div><div class="compare-stage" style="--split:54%"><img class="compare-rgb" src="/assets/tile_r05_c06/rgb" alt="PlanetScope RGB tile_r05_c06 เมืองและลำน้ำ" loading="lazy"/><img class="compare-prediction" src="/assets/tile_r05_c06/prediction" alt="A7-T prediction tile_r05_c06 เมืองและลำน้ำ" loading="lazy"/><div class="compare-split" aria-hidden="true"><span>↔</span></div><input class="compare-range" type="range" min="0" max="100" value="54" aria-label="ลากเพื่อเปรียบเทียบภาพเมืองและลำน้ำ tile_r05_c06"/></div><div class="tile-card-foot"><span>tile_r05_c06</span><span>RGB <b>↔</b> A7‑T</span></div></article>
+        </div>
+        <div class="atlas-legend" aria-label="สัญลักษณ์สีคลาสผลทำนาย A7-T"><span class="legend-heading">สีคลาสผลทำนาย A7‑T · R1–R7</span><span><i class="c1"></i>R1 สิ่งปลูกสร้าง</span><span><i class="c2"></i>R2 เกษตร</span><span><i class="c3"></i>R3 ไม้ยืนต้น</span><span><i class="c4"></i>R4 น้ำ</span><span><i class="c5"></i>R5 พืชล้มลุก</span><span><i class="c6"></i>R6 ดินเปลือย</span><span><i class="c7"></i>R7 ไม่แน่ชัด/เมฆ</span></div>
+        <p class="compare-caption">ภาพ RGB และผลจำแนกจาก Full AOI deployment เดียวกัน · เป็น visualization ไม่ใช่ Ground Truth หรือการประเมินความถูกต้อง</p>
+      </div>
+    </div>
+  </section>
+  <section class="guided-tour" id="guidedTour" aria-labelledby="tourTitle">
+    <div class="tour-sticky">
+      <div class="tour-bridge" id="tourBridge" aria-hidden="true"></div>
+      <div class="tour-atmosphere" aria-hidden="true"></div>
+      <div class="tour-vignette" aria-hidden="true"></div>
+      <div class="tour-story" aria-live="polite">
+        <div class="tour-class" id="tourClass"></div>
+        <h2 id="tourTitle">รู้จักภูมิทัศน์<br>ก่อนเริ่มค้นหา</h2>
+        <p id="tourDescription">เลื่อนเพื่อสำรวจพื้นที่เมือง เกษตร ไม้ยืนต้น แหล่งน้ำ หญ้า และดินเปลือยจากภาพ PlanetScope บนภูมิประเทศจริง</p>
+        <a class="tour-cta" id="tourCta" href="#explore" hidden>เข้าสู่แผนที่ <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="tour-hotspot" id="tourHotspot" aria-hidden="true"><span class="tour-hotspot-dot"></span><span id="tourHotspotText"></span></div>
+      <a class="tour-skip" href="#explore">ข้ามไปแผนที่ <span aria-hidden="true">↗</span></a>
+      <div class="tour-progress" aria-hidden="true"><span id="tourProgress"></span></div>
+      <p class="tour-caveat">ภาพจำแนกจาก A7-T บน COP30 DSM สำหรับการแสดงผล ไม่ใช่ Ground Truth</p>
+    </div>
+  </section>
+  <main class="workspace-shell" id="explore">
+    <div class="scope-strip" aria-label="ตัวเลือกขอบเขตการค้นหา"><select id="scopeSelect" aria-label="ขอบเขตการค้นหา"><option value="FULL_AOI">พื้นที่ทั้งหมด</option><option value="TEST40_ONLY">TEST40 เท่านั้น</option></select></div>
+    <aside class="left-panel" aria-label="GeoAI Assistant">
+      <section class="panel-section assistant-section"><div class="panel-kicker">SEMANTIC SEARCH</div><h2>สำรวจพื้นที่ด้วยคำถาม</h2><p class="muted">ค้นหาจากภาพดาวเทียม ผลจำแนกพื้นที่ และหลักฐาน GIS</p>
+        <form id="productSearch" class="product-search"><label class="sr-only" for="productQuery">ค้นหาพื้นที่ด้วยภาษาธรรมชาติ</label><textarea id="productQuery" rows="2" placeholder="ค้นหาพื้นที่ด้วยภาษาธรรมชาติ..."></textarea><button id="productAskBtn" class="primary-btn" type="submit" aria-label="ค้นหา">ค้นหา <span aria-hidden="true">↗</span></button></form>
+        <label id="llmProviderControl" class="llm-debug-control" hidden>LLM <select id="llmProviderSelect" aria-label="เลือก LLM provider สำหรับทดสอบ"><option value="openai">OpenAI</option><option value="deepseek">DeepSeek</option></select></label>
+        <div class="example-chips" aria-label="ตัวอย่างคำถาม"><span class="example-caption">ตัวอย่างคำถาม</span><button type="button" data-product-query="พื้นที่เกษตรใกล้น้ำ 300 เมตร">พื้นที่เกษตรใกล้น้ำ 300 ม.</button><button type="button" data-product-query="พื้นที่ต้นไม้มากกว่า 5 ไร่">พื้นที่ต้นไม้มากกว่า 5 ไร่</button><button type="button" data-product-query="R2 คืออะไร">R2 คืออะไร</button></div>
+        <div id="productProgress" class="product-progress" role="status" aria-live="polite" hidden></div><div id="productError" class="product-error" role="alert" hidden></div>
+        <details class="legacy-assistant"><summary>เครื่องมือค้นหาเพิ่มเติม</summary><div class="query-composer"><textarea id="agentQuery" rows="3" placeholder="ถาม Agent แบบเดิม"></textarea><div class="composer-actions"><select id="agentUnit" aria-label="หน่วยพื้นที่"><option value="ไร่">ไร่</option><option value="ha">ha</option><option value="km²">km²</option><option value="m²">m²</option></select><button id="agentAskBtn" class="primary-btn">ถาม Agent</button></div></div><div id="agentStatus" class="agent-status">พร้อมใช้งาน · fallback ปลอดภัย</div><div id="agentAnswer" class="agent-answer" hidden></div></details>
+        <input id="query" type="hidden" value="พื้นที่เกษตรกรรมเยอะ"><button id="searchBtn" hidden>search</button><div class="chips" hidden></div><div id="queryMeta" hidden></div>
+      </section>
+      <details class="panel-section suggestion-section"><summary>ตัวอย่างเพิ่มเติม</summary><div class="suggestion-grid"><button data-q="พื้นที่เกษตรที่เขียวมาก">พื้นที่เกษตรที่เขียวมาก</button><button data-q="พื้นที่ใกล้น้ำ">พื้นที่ใกล้น้ำ</button><button data-q="คำนวณพื้นที่เป็นไร่">คำนวณพื้นที่เป็นไร่</button></div><div class="suggestion-extra" id="suggestionExtra" hidden><button data-q="แสดง NDVI">แสดง NDVI</button><button data-q="แสดง NDWI">แสดง NDWI</button><button data-q="พื้นที่สิ่งปลูกสร้างเยอะ">สิ่งปลูกสร้างเยอะ</button></div><button id="moreSuggestions" class="ghost-btn" type="button" aria-expanded="false">ดูเพิ่มเติม</button></details>
+      <section class="panel-section thesis-panel" id="thesisPanel" hidden><div class="panel-kicker">REPRODUCIBILITY</div><h2>Thesis Mode</h2><dl><dt>MODEL</dt><dd>A7_RGBN_REVISED7_TVERSKY</dd><dt>CHECKPOINT</dt><dd>596F81C8…B8364F1</dd><dt>SPLIT</dt><dd>TRAIN14 / fixed VAL4</dd><dt>LOSS</dt><dd>Tversky α=0.3 β=0.7</dd><dt>SEED</dt><dd>42</dd><dt>Multi-seed mIoU</dt><dd>0.484799 ± 0.007174</dd><dt>Macro F1</dt><dd>0.622834 ± 0.008358</dd></dl><details><summary>Analysis trace</summary><ol id="traceList"><li>semantic_search()</li><li>calculate_ndvi()</li><li>distance_to_water()</li><li>calculate_area()</li></ol></details><details><summary>RAG evidence sources</summary><p>Freeze summary · multiseed summary · Full-AOI inference audit</p></details></section>
+    </aside>
+    <section class="map-column" aria-label="Map canvas"><div class="map-toolbar" aria-label="เครื่องมือแผนที่"><div class="toolbar-tools"><button id="fullAoiBtn" class="tool-btn">เต็มพื้นที่</button><button id="drawHintBtn" class="tool-btn">วาดกรอบ</button><button id="analysisHintBtn" class="tool-btn">เครื่องมือวิเคราะห์</button></div><div class="toolbar-action-group"><span class="selection-status" id="selectionStatus">แผนที่พร้อมใช้งาน</span><div class="selection-actions" id="selectionBar"><button id="selectionAnalyze" class="primary-btn" disabled title="เลือกหรือวาดพื้นที่ก่อน">วิเคราะห์</button><button id="selectionArea" class="tool-btn" disabled title="เลือกหรือวาดพื้นที่ก่อน">พื้นที่</button><button id="selectionExport" class="primary-btn" disabled title="เลือกหรือวาดพื้นที่ก่อน; เลือกรูปแบบไฟล์หลังวิเคราะห์">ส่งออก</button><button id="selectionClear" class="ghost-btn" disabled title="ล้างกรอบ พื้นที่เลือก และผลค้นหาบนแผนที่">ล้างแผนที่</button></div></div><label class="explore-thesis-tool"><input id="thesisToggle" type="checkbox"/><span>Thesis Mode</span></label><span class="map-stat" id="tileCount">323 AOI tiles · 40 TEST40</span><span id="aoiSize" hidden></span><span id="aoiCrs" hidden></span></div><div class="map-card"><div id="map"></div><div class="legend-panel compact-legend"><button id="legendToggle" class="legend-toggle" type="button" aria-expanded="false">สัญลักษณ์</button><div id="legendBody" class="legend" hidden><span><i class="swatch c1"></i>R1 Built-up</span><span><i class="swatch c2"></i>R2 Agriculture</span><span><i class="swatch c3"></i>R3 Tree</span><span><i class="swatch c4"></i>R4 Water</span><span><i class="swatch c5"></i>R5 Grass</span><span><i class="swatch c6"></i>R6 Bare</span><span><i class="swatch c7"></i>R7 Uncertain</span></div></div></div></section>
+    <aside class="right-panel" aria-label="ผลลัพธ์และหลักฐาน"><button id="closeResults" class="panel-close" type="button" aria-label="ปิดแผงผลลัพธ์">×</button><section id="productResults" class="panel-section product-results" hidden><div class="panel-kicker" id="productMode">SPATIAL QUERY</div><h2 id="productTitle">ผลการค้นหา</h2><p id="productSummary" class="muted"></p><div id="productResultCards" class="product-result-cards"></div><div id="productEvidence"></div></section><section class="panel-section results-section" hidden><div class="section-head"><div><div class="panel-kicker">SEMANTIC SEARCH</div><h2>ผลลัพธ์จัดอันดับ</h2></div><span class="badge accent" id="resultCount">0</span></div><div id="results" class="results"></div></section><section class="evidence-panel"><div class="panel-kicker">FEATURE EVIDENCE</div><div class="evidence-head"><h2 id="evidenceTitle">ยังไม่ได้เลือกพื้นที่</h2><span id="evidenceStrength" class="evidence-status limited">Limited</span></div><div id="evidenceBody" class="evidence-empty">เลือกพื้นที่หรือผลการค้นหาเพื่อดูหลักฐาน<span class="evidence-empty-sub">ระบบจะแสดง segmentation, NDVI/NDWI และข้อมูลเชิงพื้นที่ที่มีอยู่</span></div><div id="evidenceDetails" hidden><button id="whyBtn" class="secondary-btn" disabled>Why this area?</button><div class="evidence-group"><h3>SEGMENTATION</h3><div id="segEvidence"></div></div><div class="evidence-group"><h3>SPECTRAL</h3><div id="spectralEvidence"></div></div><div class="evidence-group"><h3>SPATIAL</h3><div id="spatialEvidence"></div></div><div class="evidence-compact-row" id="externalEvidence">External evidence <span>ยังไม่มีข้อมูล</span></div><details id="whyDetail" class="evidence-explain" hidden><summary>Why this area?</summary><div id="whyContent"></div></details></div></section><details class="panel-section workspace-layers"><summary class="section-head"><span><span class="panel-kicker">LAYERS</span><h2>Analysis Workspace</h2></span><span class="badge" id="layerCount">0</span></summary><div id="analysisLayers" class="layer-list"><div class="evidence-muted">ยังไม่มี analysis layer</div></div><div class="analysis-builder"><div class="panel-kicker" id="analysisHeading">ANALYSIS BUILDER</div><div class="analysis-controls"><label>Class <select id="analysisClass"><option value="1">R1 Built-up</option><option value="2" selected>R2 Agriculture</option><option value="3">R3 Tree</option><option value="4">R4 Water</option><option value="5">R5 Grass</option><option value="6">R6 Bare</option><option value="7">R7 Uncertain</option></select></label><label>NDVI &gt; <input id="analysisNdvi" type="number" value="0.6" min="-1" max="1" step="0.05"></label><button id="runAnalysisBtn" class="primary-btn">Run analysis</button></div><div id="analysisResult" class="analysis-result" hidden></div></div></details><section class="panel-section limitations"><details><summary>ข้อจำกัดของระบบ</summary><ul><li>7 land-cover classes only; full-AOI map is inference, not ground truth.</li><li>NDVI/NDWI are supporting spectral indicators, not crop/flood proof.</li><li>R7 had no fixed-VAL4 validation support; no temporal analysis.</li></ul></details></section></aside>
+  </main>
+  <template id="resultTemplate"><article class="result"><div class="result-top"><span class="rank"></span><div><h3 class="tile"></h3><p class="score"></p></div><button class="zoom" title="ซูมไปยัง tile">↗</button></div><div class="distribution"></div><div class="media"><img class="rgb" loading="lazy"><img class="overlay" loading="lazy"><label>overlay <input type="range" min="0" max="1" step="0.05" value="0.52"></label></div><details class="scoring-details" hidden><summary>Scoring details</summary><p class="explanation"></p><p class="result-meta"></p></details><button class="why-result secondary-btn">Why this area?</button></article></template>
+  <script src="/vendor/leaflet/leaflet.js?v=1.9.4"></script><script src="/class-schema.js?v=a7t-palette-1"></script><script src="/app.js?v=explore-ui-20260921b"></script><script src="/roi-preview.js?v=roi-preview-1"></script><script src="/drawn-aoi.js?v=aoi-ux-polish-20260920"></script><script src="/agent.js?v=llm-provider-20260925"></script><script src="/analysis.js?v=external-aoi-20260921b"></script><script src="/evidence.js?v=final-polish-1"></script><script src="/workspace.js?v=aoi-ux-polish-20260920"></script><script src="/product.js?v=distance-reference-20260928d"></script><script src="/experience.js?v=map-integration-1"></script><script src="/cinematic.js?v=numbered-results-20260919"></script><script src="/vendor/gsap/gsap.min.js?v=3.15.0"></script><script src="/vendor/gsap/ScrollTrigger.min.js?v=3.15.0"></script><script type="module" src="/landscape-tour-v2.js?v=story-flow-20260919"></script><script src="/hero-reveal.js?v=1"></script>
+<section id="crosscheckSection" class="crosscheck-section standalone-crosscheck" hidden><h2>Evidence Cross-Check</h2><div class="crosscheck-grid"><div><span class="crosscheck-label">Spectral consistency</span><strong id="crosscheckSpectral">—</strong></div><div><span class="crosscheck-label">External context</span><strong id="crosscheckExternal">—</strong></div></div><p id="crosscheckSummary" class="crosscheck-summary">Prediction-conditioned NDVI/NDWI reference; not accuracy.</p><div id="crosscheckDetails" class="crosscheck-details"></div><div class="evidence-note">Evidence consistency ≠ model accuracy</div></section></body></html>

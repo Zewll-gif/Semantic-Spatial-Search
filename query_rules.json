@@ -1,0 +1,16 @@
+{
+  "scoring": "score = 100 * clamp(sum(weight_i * feature_i), 0, 1)",
+  "tie_break": "descending score, then tile_id ascending",
+  "intents": {
+    "built_agriculture_mixture": {"keywords": ["สิ่งปลูกสร้าง + เกษตร", "ปะปน", "mixed"], "weights": {"builtup_ratio": 0.35, "agriculture_ratio": 0.35, "built_ag_mix": 0.15, "entropy": 0.15}},
+    "built_green_mixture": {"keywords": ["สิ่งปลูกสร้างกับพื้นที่สีเขียวปะปน", "built green mixed"], "weights": {"builtup_ratio": 0.35, "natural_green_ratio": 0.35, "built_green_mix": 0.15, "entropy": 0.15}},
+    "agriculture": {"keywords": ["เกษตร", "นา", "ไร่", "agriculture", "farm", "crop"], "weights": {"agriculture_ratio": 0.7, "vegetation_ratio": 0.2, "entropy": 0.1}},
+    "built_up": {"keywords": ["ชุมชน", "เมือง", "อาคาร", "built", "urban"], "weights": {"builtup_ratio": 0.75, "built_green_mix": 0.15, "entropy": 0.1}},
+    "trees": {"keywords": ["ต้นไม้", "ป่า", "tree", "forest"], "weights": {"tree_ratio": 0.75, "natural_green_ratio": 0.2, "entropy": 0.05}},
+    "water": {"keywords": ["น้ำ", "แม่น้ำ", "water", "river", "lake"], "weights": {"water_ratio": 0.8, "water_green_mix": 0.15, "entropy": 0.05}},
+    "green": {"keywords": ["สีเขียว", "green", "vegetation"], "weights": {"vegetation_ratio": 0.55, "natural_green_ratio": 0.35, "entropy": 0.1}},
+    "open_land": {"keywords": ["พื้นที่โล่ง", "bare", "open"], "weights": {"open_land_ratio": 0.65, "bare_ratio": 0.25, "entropy": 0.1}},
+    "built_ag_mix": {"keywords": ["ปะปน", "ผสม", "mixed", "mixture"], "weights": {"built_ag_mix": 0.55, "builtup_ratio": 0.15, "agriculture_ratio": 0.15, "entropy": 0.15}},
+    "diverse": {"keywords": ["หลากหลาย", "diverse", "entropy"], "weights": {"entropy": 0.75, "dominance_score": -0.25}}
+  }
+}

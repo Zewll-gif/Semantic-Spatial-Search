@@ -1,0 +1,33 @@
+{
+  "name": "NDVI",
+  "source_raster": "D:\\499_2\\image_planet\\files\\composite.tif",
+  "formula": "(NIR - Red) / (NIR + Red)",
+  "bands": {
+    "a": 4,
+    "b": 3
+  },
+  "dtype": "float32",
+  "nodata": -9999.0,
+  "width": 8302,
+  "height": 9308,
+  "crs": "EPSG:32647",
+  "transform": [
+    3.0,
+    0.0,
+    488442.0,
+    0.0,
+    -3.0,
+    2091723.0,
+    0.0,
+    0.0,
+    1.0
+  ],
+  "valid_pixels": 77200673,
+  "min": -0.4434337615966797,
+  "max": 0.9257383942604065,
+  "mean": 0.4822082221508026,
+  "median": 0.4906666576862335,
+  "std": 0.18180333077907562,
+  "preview_path": "D:\\499_4\\FINAL_ANALYSIS\\SPECTRAL_INDICES\\NDVI_FULL_AOI_PREVIEW.png",
+  "analysis_raster": "D:\\499_4\\FINAL_ANALYSIS\\SPECTRAL_INDICES\\NDVI_FULL_AOI.tif"
+}

@@ -1,0 +1,6 @@
+{
+  "model": "A7_RGBN_REVISED7_TVERSKY",
+  "scope": "TEST40",
+  "feature_count": 40,
+  "compatible_schema": "A7_CE"
+}

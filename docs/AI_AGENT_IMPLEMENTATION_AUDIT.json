@@ -1,0 +1,72 @@
+{
+  "audit_date": "2026-09-16",
+  "status": "PASS",
+  "scope": "AI Agent + deterministic GIS tools + local RAG + reliability context",
+  "architecture_reused": [
+    "backend/main.py FastAPI application",
+    "backend/geoai_api.py deterministic spatial foundation",
+    "backend/agent_layer.py provider abstraction and V1 compatibility",
+    "A7-T clean GeoPackage",
+    "source-aligned NDVI/NDWI rasters",
+    "existing semantic-search frontend"
+  ],
+  "created": [
+    "backend/config/class_schema.json",
+    "backend/canonical_schema.py",
+    "backend/intent_router.py",
+    "backend/gis_tools.py",
+    "backend/rag_service.py",
+    "backend/reliability.py",
+    "backend/agent_orchestrator.py",
+    "backend/agent_api_v2.py",
+    "backend/knowledge/knowledge_base.json",
+    "agent_tools_v2.json",
+    "tests/test_agent_v2.py",
+    "docs/CURRENT_ARCHITECTURE_PREFLIGHT.md",
+    "docs/AI_AGENT_ARCHITECTURE.md",
+    "docs/AGENT_TOOL_CONTRACT.md",
+    "docs/KNOWLEDGE_BASE.md"
+  ],
+  "modified": ["backend/main.py", "README.md"],
+  "canonical_schema": "A7_REVISED7_V1",
+  "gis_backend": {
+    "mode": "read-only GeoPackage fallback",
+    "postgis": "CONFIG_REQUIRED",
+    "vector": "D:/499_4/FINAL_ANALYSIS/A7_T_VECTOR_BACKEND/vector_clean/A7_T_FULL_AOI_POLYGONS_CLEAN.gpkg",
+    "area_distance_crs": "EPSG:32647",
+    "geojson_crs": "EPSG:4326"
+  },
+  "rag": {
+    "implementation": "dependency-light lexical retrieval over verified project documents",
+    "categories": ["land_cover_taxonomy", "model_metadata", "validation_limitations", "tool_api_documentation"]
+  },
+  "llm": {
+    "provider_abstraction": "existing OpenAIAdapter reused",
+    "openai_api_key_configured": false,
+    "remote_completion": "disabled_fail_closed",
+    "deterministic_pipeline_available_without_key": true
+  },
+  "tests": {
+    "v2_unittest": {"passed": 12, "failed": 0, "duration_seconds": 37.411},
+    "legacy_geoai_regression": {"passed": 15, "failed": 0},
+    "python_compile": "PASS",
+    "live_http": "PASS"
+  },
+  "canonical_demo": {
+    "query": "หาพื้นที่เกษตรมากกว่า 5 ไร่ ใกล้น้ำไม่เกิน 300 เมตร",
+    "status": "success",
+    "mode": "spatial",
+    "count": 3,
+    "tool": "find_nearby",
+    "source_class_id": "R2",
+    "target_class_id": "R4",
+    "max_distance_m": 300.0,
+    "min_area": 5.0,
+    "area_unit": "rai",
+    "independent_validation": false
+  },
+  "provenance_note": "The task-provided aggregate values match A7-T multi-seed evidence, but the supplied per-class values matched the earlier A7 seed-42 artifact. The KB uses verified A7-T multi-seed per-class means from FINAL_TVERSKY_PROMOTION_AUDIT.json to avoid cross-model mislabelling.",
+  "test40_accessed_for_selection": false,
+  "model_retrained": false,
+  "taxonomy_changed": false
+}

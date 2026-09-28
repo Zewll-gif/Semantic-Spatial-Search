@@ -1,0 +1,74 @@
+/*
+CLEAN PROJECT HEADER
+ไฟล์: landscape-tour.css
+หน้าที่: ส่วนแสดงผลและ interaction ของ GeoAI Explorer
+Input: ข้อมูลจาก API และ static assets
+Output: หน้าเว็บหรือพฤติกรรม UI
+Dependency สำคัญ: backend API และ class schema
+สิ่งที่ต้องระวัง: ห้ามเปลี่ยน taxonomy, model output, CRS หรือหน่วยโดยไม่ตรวจ audit
+*/
+.guided-tour { position: relative; height: 600svh; color: #fff; background: #0b201a; scroll-margin-top: 0; }
+.tour-sticky { position: sticky; top: 0; height: 100svh; min-height: 580px; overflow: hidden; isolation: isolate; background: #0c211b; }
+.tour-ambient { position: absolute; inset: -7%; z-index: -3; background: url('/aoi/full_aoi_rgb.png') center / cover no-repeat; filter: blur(36px) saturate(.65) brightness(.54); transform: scale(1.08); }
+.tour-world { position: absolute; z-index: -2; top: 0; left: 0; width: max(100vw, 89svh); aspect-ratio: 1038 / 1164; transform-origin: 0 0; will-change: transform; }
+.tour-world > img { display: block; width: 100%; height: 100%; object-fit: fill; filter: saturate(.86) contrast(1.06) brightness(.82); }
+.tour-vignette { position: absolute; z-index: -1; inset: 0; pointer-events: none; background: linear-gradient(90deg,rgba(4,20,16,.82),rgba(4,20,16,.24) 48%,rgba(4,20,16,.13) 80%),linear-gradient(0deg,rgba(4,20,16,.77),transparent 36%,transparent 64%,rgba(4,20,16,.25)); }
+.tour-vignette::after { content: ''; position: absolute; inset: 0; opacity: .22; background: radial-gradient(circle at 68% 40%,rgba(233,246,218,.25),transparent 35%); }
+.tour-hotspot-layer { position: absolute; z-index: 3; inset: 0; pointer-events: none; }
+.tour-detail { position: absolute; z-index: 1; right: 6vw; bottom: clamp(160px,19vh,220px); width: min(29vw,390px); margin: 0; opacity: 0; transform: translateY(24px) scale(.97); transition: opacity .55s,transform .7s var(--ease); pointer-events: none; filter: drop-shadow(0 30px 55px rgba(0,0,0,.3)); }
+.guided-tour[data-step="1"] .tour-detail,.guided-tour[data-step="2"] .tour-detail,.guided-tour[data-step="3"] .tour-detail,.guided-tour[data-step="4"] .tour-detail { opacity: 1; transform: none; }
+.tour-detail img { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; border: 1px solid rgba(255,255,255,.68); border-radius: 18px; }
+.tour-detail figcaption { display: flex; justify-content: space-between; gap: 15px; margin-top: 9px; color: rgba(255,255,255,.9); font: 600 .62rem var(--display); letter-spacing: .11em; }
+.tour-topline { position: absolute; top: 38px; left: 6vw; right: 6vw; display: flex; justify-content: space-between; gap: 20px; color: #ebf3ec; font: 600 .7rem var(--display); letter-spacing: .18em; text-shadow: 0 1px 10px #102018; }
+.tour-topline span:first-child::before { content: ''; display: inline-block; width: 8px; height: 8px; margin-right: 12px; border-radius: 50%; background: var(--moss); box-shadow: 0 0 14px var(--moss); }
+.tour-copy { position: absolute; z-index: 2; left: 6vw; bottom: clamp(130px,18vh,220px); width: min(510px,42vw); text-shadow: 0 2px 18px rgba(0,0,0,.3); }
+.tour-step-label { color: #c5dfbc; font: 600 .72rem var(--display); letter-spacing: .19em; }
+.tour-copy h2 { margin: 20px 0 20px; font: 700 clamp(3.1rem,5.1vw,6.7rem)/1.04 var(--thai); letter-spacing: -.052em; text-wrap: balance; }
+.tour-copy h2 em { color: #d5efa8; font-style: normal; }
+.tour-copy p { max-width: 470px; margin: 0 0 20px; color: #e3ece5; font-size: clamp(1rem,1.1vw,1.2rem); line-height: 1.8; }
+.tour-tile-note { display: block; color: #b5c9bd; font: 400 .75rem/1.55 var(--thai); }
+.tour-cta { display: inline-flex; align-items: center; gap: 30px; margin-top: 28px; padding: 14px 20px; border-radius: 999px; color: #102419; background: var(--moss); font-weight: 600; text-decoration: none; box-shadow: 0 14px 40px rgba(0,0,0,.28); opacity: 0; pointer-events: none; transform: translateY(16px); transition: opacity .4s,transform .5s var(--ease); }
+.guided-tour[data-step="5"] .tour-cta { opacity: 1; pointer-events: auto; transform: none; }
+.tour-cta:hover span { transform: translate(4px,-4px); }
+.tour-cta span { transition: transform .25s; }
+.tour-hotspot { position: absolute; z-index: 2; display: flex; align-items: center; gap: 12px; width: max-content; opacity: 0; transform: translate(-12px,-50%) scale(.92); transition: opacity .4s,transform .5s var(--ease); pointer-events: none; }
+.tour-hotspot.is-active { opacity: 1; transform: translate(0,-50%) scale(var(--inverse-scale,1)); }
+.tour-hotspot-pin { width: 15px; height: 15px; border: 3px solid white; border-radius: 50%; background: #bfe487; box-shadow: 0 0 0 9px rgba(255,255,255,.16),0 0 30px #fff; }
+.tour-hotspot-label { padding: 11px 14px; border: 1px solid rgba(255,255,255,.75); border-radius: 11px; color: #11241b; background: rgba(255,255,255,.96); box-shadow: 0 14px 35px rgba(0,0,0,.22); font: 700 .72rem/1.35 var(--display); letter-spacing: .07em; white-space: nowrap; text-shadow: none; }
+.tour-hotspot-label small { display: block; margin-top: 4px; color: #536a5e; font: 500 .65rem var(--display); letter-spacing: 0; }
+.tour-bottom { position: absolute; left: 6vw; right: 6vw; bottom: 44px; display: flex; align-items: center; gap: 20px; }
+.tour-step-buttons { display: flex; gap: 5px; }
+.tour-step-buttons button { width: 35px; height: 35px; border: 1px solid rgba(255,255,255,.35); border-radius: 50%; color: #dce6dd; background: rgba(14,34,26,.32); font: 600 .64rem var(--display); cursor: pointer; transition: background .25s,color .25s,border-color .25s,transform .25s; }
+.tour-step-buttons button:hover { transform: translateY(-3px); }
+.tour-step-buttons button[aria-current="step"] { border-color: var(--moss); color: #0b2119; background: var(--moss); }
+.tour-progress-track { flex: 1; height: 2px; background: rgba(255,255,255,.3); }
+.tour-progress-track span { display: block; width: 0; height: 100%; background: var(--moss); transform-origin: left; }
+.tour-scroll-hint { color: #d3e0d5; font: 600 .62rem var(--display); letter-spacing: .13em; white-space: nowrap; }
+.tour-source-note { position: absolute; right: 6vw; bottom: 100px; color: rgba(235,245,233,.7); font: 400 .65rem var(--thai); }
+.guided-tour::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: rgba(255,255,255,.3); }
+@media (max-width: 900px) {
+  .tour-copy { width: min(520px,72vw); }
+  .tour-detail { width: min(27vw,260px); right: 4vw; bottom: 25vh; }
+  .tour-vignette { background: linear-gradient(90deg,rgba(4,20,16,.86),rgba(4,20,16,.3) 76%),linear-gradient(0deg,rgba(4,20,16,.83),transparent 60%); }
+}
+@media (max-width: 640px) {
+  .guided-tour { height: 600svh; }
+  .tour-sticky { min-height: 0; }
+  .tour-topline { top: 25px; left: 20px; right: 20px; font-size: .59rem; }
+  .tour-topline span:last-child { display: none; }
+  .tour-copy { left: 22px; right: 22px; bottom: 146px; width: auto; }
+  .tour-detail { top: 90px; right: 22px; bottom: auto; width: min(42vw,180px); }
+  .tour-detail img { border-radius: 13px; }
+  .tour-detail figcaption { display: none; }
+  .tour-copy h2 { font-size: clamp(2.35rem,10vw,3.7rem); }
+  .tour-copy p { font-size: .93rem; line-height: 1.65; }
+  .tour-bottom { left: 20px; right: 20px; bottom: 35px; gap: 10px; }
+  .tour-step-buttons button { width: 31px; height: 31px; }
+  .tour-scroll-hint, .tour-source-note { display: none; }
+  .tour-hotspot-label { padding: 8px 9px; font-size: .58rem; }
+  .tour-hotspot-pin { width: 12px; height: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tour-world { will-change: auto; }
+  .tour-hotspot,.tour-cta { transition: none !important; }
+}

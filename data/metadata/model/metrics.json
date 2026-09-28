@@ -1,0 +1,15 @@
+{
+  "experiment": "A4_TVERSKY",
+  "seed": 42,
+  "status": "SUCCESS",
+  "best_epoch": 35,
+  "early_stopping_epoch": 50,
+  "accuracy": 0.7567005889078579,
+  "mIoU": 0.5102423590881104,
+  "macro_f1": 0.6537037031758924,
+  "kappa": 0.6623753816260817,
+  "training_minutes": 2.239550892512004,
+  "peak_vram_mb": 505.47705078125,
+  "parameter_count": 7763527,
+  "TEST40_ACCESSED": "NO"
+}

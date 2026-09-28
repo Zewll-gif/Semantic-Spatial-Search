@@ -1,0 +1,32 @@
+.experience-hero .hero-nav,.experience-hero .hero-content,.experience-hero .hero-bottom{opacity:var(--hero-content-opacity,1)!important}
+.journey-scene{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0;visibility:hidden;background:#14211d}
+.journey-scene .tour-map{position:absolute;inset:0;background:#17241d}
+.journey-shade{position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(5,19,17,.72),rgba(5,19,17,.25) 48%,transparent 80%),linear-gradient(0deg,rgba(5,18,16,.58),transparent 40%,rgba(5,18,16,.12));opacity:var(--journey-shade-opacity,1)}
+body.journey-ready .journey-scene{opacity:1;visibility:visible}
+body.journey-ready .experience-hero,body.journey-ready .guided-tour{background:transparent}
+body.journey-ready .experience-hero .hero-imagery,body.journey-ready .experience-hero .hero-semantic,body.journey-ready .experience-hero .hero-shade,body.journey-ready .guided-tour .tour-bridge,body.journey-ready .guided-tour .tour-atmosphere,body.journey-ready .guided-tour .tour-vignette{display:none}
+body.journey-ready .experience-hero{z-index:1}
+.journey-scene .maplibregl-control-container{display:none}
+.guided-tour{--tour-reveal-opacity:0;position:relative;z-index:1;height:100svh;min-height:620px;background:#14211d;color:#fff;isolation:isolate;overflow:hidden}
+.tour-sticky,.tour-bridge,.tour-atmosphere,.tour-vignette{position:absolute;inset:0}
+.tour-bridge{z-index:1;background:linear-gradient(90deg,rgba(5,20,17,.75),transparent 75%),url('/aoi/full_aoi_rgb.png') center 43%/cover no-repeat;pointer-events:none}
+.tour-atmosphere{z-index:2;pointer-events:none;background:radial-gradient(ellipse 80% 60% at 65% 14%,rgba(224,240,230,.1),transparent 65%)}
+.tour-vignette{z-index:3;pointer-events:none;background:linear-gradient(90deg,rgba(8,22,18,.78),rgba(8,22,18,.25) 52%,transparent 75%),linear-gradient(0deg,rgba(8,22,18,.68),transparent 37%)}
+.tour-story{position:absolute;z-index:5;left:clamp(26px,7vw,126px);top:50%;width:min(520px,42vw);transform:translateY(-50%);text-shadow:0 2px 26px rgba(0,0,0,.35)}
+.tour-story,.tour-skip,.tour-progress,.tour-caveat{opacity:var(--tour-reveal-opacity,1)!important}
+.tour-class{font:700 clamp(23px,2.6vw,40px)/1 Inter,'IBM Plex Sans Thai',sans-serif;color:#d6eadb;margin-bottom:18px;min-height:1em}
+.tour-class:empty{display:none}
+.tour-story h2{font-family:'IBM Plex Sans Thai',Inter,sans-serif;font-size:clamp(42px,5.5vw,88px);line-height:1.12;font-weight:600;letter-spacing:-.055em;margin:0 0 22px;max-width:700px;text-wrap:balance}
+.tour-story p{font-family:'IBM Plex Sans Thai',Inter,sans-serif;font-size:clamp(16px,1.25vw,21px);line-height:1.7;font-weight:400;max-width:490px;margin:0;color:#e4eee8}
+.tour-cta{display:inline-flex;align-items:center;gap:26px;margin-top:32px;padding:14px 20px;border-radius:999px;background:#e6f4e7;color:#12261e;text-decoration:none;font:600 17px 'IBM Plex Sans Thai',sans-serif;text-shadow:none;box-shadow:0 14px 30px rgba(0,0,0,.2);transition:transform .25s,background .25s}
+.tour-cta:hover{transform:translateY(-3px);background:#fff}.tour-cta[hidden]{display:none}
+.tour-hotspot{position:absolute;z-index:6;display:flex;gap:13px;align-items:center;padding:10px 15px 10px 10px;border:1px solid rgba(255,255,255,.7);border-radius:999px;background:rgba(12,29,25,.64);backdrop-filter:blur(10px);box-shadow:0 12px 24px rgba(0,0,0,.25);font:600 15px 'IBM Plex Sans Thai',Inter,sans-serif;color:#fff;white-space:nowrap;opacity:0;pointer-events:none;transform:translate(-12px,-50%)}
+.tour-hotspot-dot{height:11px;width:11px;border:2px solid white;border-radius:50%;box-shadow:0 0 0 5px rgba(255,255,255,.17)}
+.tour-skip{position:absolute;z-index:6;top:30px;right:clamp(22px,4vw,70px);color:#fff;font:500 15px 'IBM Plex Sans Thai',sans-serif;text-decoration:none;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.6)}
+.tour-progress{position:absolute;z-index:6;left:clamp(26px,7vw,126px);right:clamp(26px,7vw,126px);bottom:43px;height:2px;background:rgba(255,255,255,.28);overflow:hidden}
+.tour-progress span{display:block;width:100%;height:100%;background:#d4efda;transform:scaleX(0);transform-origin:left}
+.tour-caveat{position:absolute;z-index:6;right:clamp(26px,7vw,126px);bottom:52px;margin:0;color:rgba(255,255,255,.79);font:400 12px 'IBM Plex Sans Thai',sans-serif;text-align:right}
+.guided-tour.tour-fallback{--tour-reveal-opacity:1}.guided-tour.tour-fallback .tour-bridge{opacity:1!important}.guided-tour.tour-fallback .tour-story{width:min(600px,80vw)}
+@media(max-width:900px){.tour-story{left:6vw;width:61vw}.tour-story h2{font-size:clamp(42px,6vw,72px)}.tour-hotspot{font-size:13px}.tour-caveat{display:none}}
+@media(max-width:640px){.guided-tour{min-height:100svh}.tour-story{left:24px;top:auto;bottom:105px;width:calc(100% - 48px);transform:none}.tour-story h2{font-size:clamp(38px,11vw,55px);margin-bottom:12px}.tour-story p{font-size:15px;max-width:380px}.tour-class{font-size:27px;margin-bottom:8px}.journey-shade{background:linear-gradient(0deg,rgba(8,22,18,.91),rgba(8,22,18,.18) 67%,rgba(8,22,18,.17))}.tour-hotspot{top:27%!important;left:24px!important;transform:none}.tour-skip{right:24px;top:20px}.tour-progress{left:24px;right:24px;bottom:27px}.tour-cta{margin-top:20px}}
+@media(prefers-reduced-motion:reduce){.tour-hotspot,.tour-cta{transition:none!important;animation:none!important}}

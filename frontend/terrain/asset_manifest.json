@@ -1,0 +1,48 @@
+{
+  "source_dem": "data/rasters/dem/geoai_aoi_dem_cop30_30m.tif",
+  "source_imagery": "data/rasters/planetscope/planetscope_full_aoi_rgbn.tif",
+  "source_vector": "data/vectors/A7_T_FULL_AOI_POLYGONS_CLEAN.gpkg",
+  "dem_type": "COP30 DSM, not bare-earth DTM",
+  "terrain_encoding": "Terrarium elevation metres: R*256+G+B/256-32768",
+  "web_projection": "EPSG:3857",
+  "dem_resampling": "bilinear",
+  "imagery_resampling": "bilinear",
+  "rgb_source_bands": [
+    3,
+    2,
+    1
+  ],
+  "rgb_display_percentiles": {
+    "p2": [
+      254.0,
+      322.0,
+      155.0
+    ],
+    "p98": [
+      1802.0,
+      1505.0,
+      1283.0
+    ]
+  },
+  "terrain_zoom_levels": [
+    10,
+    11,
+    12,
+    13,
+    14
+  ],
+  "imagery_zoom_levels": [
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "tile_size_px": 256,
+  "dem_tile_count": 227,
+  "rgb_tile_count": 799,
+  "locations": 6,
+  "source_modified": false,
+  "elevation_normalized": false
+}

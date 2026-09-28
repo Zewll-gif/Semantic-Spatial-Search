@@ -1,0 +1,138 @@
+{
+  "benchmark_version": "1.0",
+  "metadata": {
+    "created_before_provider_runs": true,
+    "taxonomy_version": "A7_REVISED7_V1",
+    "tool_contract_version": "2.0.0",
+    "date_created": "2026-09-16",
+    "query_count": 30,
+    "runs_per_query_default": 3,
+    "gold_answers_locked": true
+  },
+  "queries": [
+    {
+      "id": "S01", "category": "spatial", "query": "หาพื้นที่เกษตรกรรมที่อยู่ใกล้แหล่งน้ำไม่เกิน 300 เมตร",
+      "gold": {"mode": "spatial", "classes": {"source_class_id": "R2", "target_class_id": "R4"}, "parameters": {"max_distance_m": 300}, "expected_tools": ["find_nearby"], "clarification_required": false, "unsupported": false, "knowledge_topics": [], "reliability_required": false, "must_not_claim": []}
+    },
+    {
+      "id": "S02", "category": "spatial", "query": "หาพื้นที่เกษตรมากกว่า 5 ไร่",
+      "gold": {"mode": "spatial", "classes": {"class_id": "R2"}, "parameters": {"min_area": 5, "area_unit": "rai"}, "expected_tools": ["filter_by_area"], "clarification_required": false, "unsupported": false, "knowledge_topics": [], "reliability_required": false, "must_not_claim": []}
+    },
+    {
+      "id": "S03", "category": "spatial", "query": "หาพื้นที่สิ่งปลูกสร้างที่อยู่ติดกับพื้นที่เกษตรกรรม",
+      "gold": {"mode": "spatial", "classes": {"source_class_id": "R1", "target_class_id": "R2"}, "parameters": {"relation": "intersects_or_touching"}, "expected_tools": ["intersects"], "clarification_required": false, "unsupported": false, "knowledge_topics": [], "reliability_required": false, "must_not_claim": []}
+    },
+    {
+      "id": "S04", "category": "spatial", "query": "หาพื้นที่น้ำทั้งหมดในพื้นที่ศึกษา",
+      "gold": {"mode": "spatial", "classes": {"class_id": "R4"}, "parameters": {}, "expected_tools": ["search_landcover"], "clarification_required": false, "unsupported": false, "knowledge_topics": [], "reliability_required": false, "must_not_claim": []}
+    },
+    {
+      "id": "S05", "category": "spatial", "query": "หาพื้นที่ต้นไม้ที่มีขนาดอย่างน้อย 2 เฮกตาร์",
+      "gold": {"mode": "spatial", "classes": {"class_id": "R3"}, "parameters": {"min_area": 2, "area_unit": "hectare"}, "expected_tools": ["filter_by_area"], "clarification_required": false, "unsupported": false, "knowledge_topics": [], "reliability_required": false, "must_not_claim": []}
+    },
+    {
+      "id": "S06", "category": "spatial", "query": "หาพื้นที่ดินโล่งที่อยู่ภายใน 500 เมตรจากพื้นที่สิ่งปลูกสร้าง",
+      "gold": {"mode": "spatial", "classes": {"source_class_id": "R6", "target_class_id": "R1"}, "parameters": {"max_distance_m": 500}, "expected_tools": ["find_nearby"], "clarification_required": false, "unsupported": false, "knowledge_topics": [], "reliability_required": false, "must_not_claim": []}
+    },
+
+    {
+      "id": "K01", "category": "knowledge", "query": "R2 คืออะไร",
+      "gold": {"mode": "knowledge", "classes": {"class_id": "R2"}, "parameters": {}, "expected_tools": [], "clarification_required": false, "unsupported": false, "knowledge_topics": ["land_cover_taxonomy"], "reliability_required": false, "must_not_claim": []}
+    },
+    {
+      "id": "K02", "category": "knowledge", "query": "A7-T ใช้สถาปัตยกรรมอะไร",
+      "gold": {"mode": "knowledge", "classes": {}, "parameters": {"expected_answer_fact": "U-Net"}, "expected_tools": [], "clarification_required": false, "unsupported": false, "knowledge_topics": ["model_metadata"], "reliability_required": false, "must_not_claim": []}
+    },
+    {
+      "id": "K03", "category": "knowledge", "query": "A7-T ใช้ข้อมูลนำเข้ากี่แบนด์",
+      "gold": {"mode": "knowledge", "classes": {}, "parameters": {"expected_answer_fact": "RGBN 4 bands"}, "expected_tools": [], "clarification_required": false, "unsupported": false, "knowledge_topics": ["model_metadata"], "reliability_required": false, "must_not_claim": []}
+    },
+    {
+      "id": "K04", "category": "knowledge", "query": "TEST40 มี Ground Truth หรือไม่",
+      "gold": {"mode": "knowledge", "classes": {}, "parameters": {"expected_answer_fact": "no_ground_truth"}, "expected_tools": [], "clarification_required": false, "unsupported": false, "knowledge_topics": ["validation_limitations"], "reliability_required": false, "must_not_claim": []}
+    },
+    {
+      "id": "K05", "category": "knowledge", "query": "Full AOI ถือเป็นผลที่ผ่าน independent validation หรือไม่",
+      "gold": {"mode": "knowledge", "classes": {}, "parameters": {"expected_answer_fact": false}, "expected_tools": [], "clarification_required": false, "unsupported": false, "knowledge_topics": ["validation_limitations"], "reliability_required": false, "must_not_claim": []}
+    },
+    {
+      "id": "K06", "category": "knowledge", "query": "Tversky Loss ในงานนี้ใช้ค่า alpha และ beta เท่าไร",
+      "gold": {"mode": "knowledge", "classes": {}, "parameters": {"alpha": 0.3, "beta": 0.7}, "expected_tools": [], "clarification_required": false, "unsupported": false, "knowledge_topics": ["model_metadata"], "reliability_required": false, "must_not_claim": []}
+    },
+
+    {
+      "id": "M01", "category": "mixed", "query": "หาพื้นที่เกษตรใกล้น้ำไม่เกิน 300 เมตร แล้วบอกด้วยว่าผลนี้เชื่อถือได้แค่ไหน",
+      "gold": {"mode": "mixed", "classes": {"source_class_id": "R2", "target_class_id": "R4"}, "parameters": {"max_distance_m": 300}, "expected_tools": ["find_nearby"], "clarification_required": false, "unsupported": false, "knowledge_topics": ["validation_limitations"], "reliability_required": true, "must_not_claim": ["calibrated confidence", "polygon confidence"]}
+    },
+    {
+      "id": "M02", "category": "mixed", "query": "หาพื้นที่ต้นไม้มากกว่า 3 ไร่ แล้วอธิบายว่า R3 หมายถึงอะไร",
+      "gold": {"mode": "mixed", "classes": {"class_id": "R3"}, "parameters": {"min_area": 3, "area_unit": "rai"}, "expected_tools": ["filter_by_area"], "clarification_required": false, "unsupported": false, "knowledge_topics": ["land_cover_taxonomy"], "reliability_required": false, "must_not_claim": []}
+    },
+    {
+      "id": "M03", "category": "mixed", "query": "หาพื้นที่น้ำทั้งหมด แล้วบอกว่าผลนี้มาจากโมเดลอะไร",
+      "gold": {"mode": "mixed", "classes": {"class_id": "R4"}, "parameters": {}, "expected_tools": ["search_landcover"], "clarification_required": false, "unsupported": false, "knowledge_topics": ["model_metadata"], "reliability_required": false, "must_not_claim": []}
+    },
+    {
+      "id": "M04", "category": "mixed", "query": "หาพื้นที่สิ่งปลูกสร้างใกล้พื้นที่เกษตรไม่เกิน 200 เมตร และบอกข้อจำกัดของผล",
+      "gold": {"mode": "mixed", "classes": {"source_class_id": "R1", "target_class_id": "R2"}, "parameters": {"max_distance_m": 200}, "expected_tools": ["find_nearby"], "clarification_required": false, "unsupported": false, "knowledge_topics": ["validation_limitations"], "reliability_required": true, "must_not_claim": ["independently validated"]}
+    },
+    {
+      "id": "M05", "category": "mixed", "query": "หาพื้นที่ดินโล่งมากกว่า 1 ไร่ แล้วบอกค่า IoU ของ R6 ที่ใช้เป็นบริบทการประเมิน",
+      "gold": {"mode": "mixed", "classes": {"class_id": "R6"}, "parameters": {"min_area": 1, "area_unit": "rai"}, "expected_tools": ["filter_by_area"], "clarification_required": false, "unsupported": false, "knowledge_topics": ["per_class_validation"], "reliability_required": true, "must_not_claim": ["polygon confidence"]}
+    },
+    {
+      "id": "M06", "category": "mixed", "query": "หาพื้นที่เกษตรกรรมใกล้น้ำ 500 เมตร พร้อมอธิบายว่า TEST40 ใช้ประเมิน accuracy ได้หรือไม่",
+      "gold": {"mode": "mixed", "classes": {"source_class_id": "R2", "target_class_id": "R4"}, "parameters": {"max_distance_m": 500}, "expected_tools": ["find_nearby"], "clarification_required": false, "unsupported": false, "knowledge_topics": ["validation_limitations"], "reliability_required": true, "must_not_claim": ["TEST40 accuracy"]}
+    },
+
+    {
+      "id": "A01", "category": "ambiguous", "query": "หาพื้นที่เกษตรที่อยู่ใกล้น้ำ",
+      "gold": {"mode": "spatial", "classes": {"source_class_id": "R2", "target_class_id": "R4"}, "parameters": {"max_distance_m": null}, "expected_tools": [], "clarification_required": true, "clarification_topic": "max_distance", "unsupported": false, "knowledge_topics": [], "reliability_required": false, "must_not_claim": []}
+    },
+    {
+      "id": "A02", "category": "ambiguous", "query": "หาพื้นที่ใหญ่ ๆ ที่เป็นเกษตร",
+      "gold": {"mode": "spatial", "classes": {"class_id": "R2"}, "parameters": {"min_area": null}, "expected_tools": [], "clarification_required": true, "clarification_topic": "minimum_area", "unsupported": false, "knowledge_topics": [], "reliability_required": false, "must_not_claim": []}
+    },
+    {
+      "id": "A03", "category": "ambiguous", "query": "หาพื้นที่ใกล้เมือง",
+      "gold": {"mode": "spatial", "classes": {"target_class_id": "R1"}, "parameters": {"max_distance_m": null}, "expected_tools": [], "clarification_required": true, "clarification_topic": "source_class_and_max_distance", "unsupported": false, "knowledge_topics": [], "reliability_required": false, "must_not_claim": ["guessed source class"]}
+    },
+    {
+      "id": "A04", "category": "ambiguous", "query": "หาพื้นที่ต้นไม้ที่อยู่ใกล้แหล่งน้ำมาก ๆ",
+      "gold": {"mode": "spatial", "classes": {"source_class_id": "R3", "target_class_id": "R4"}, "parameters": {"max_distance_m": null}, "expected_tools": [], "clarification_required": true, "clarification_topic": "max_distance", "unsupported": false, "knowledge_topics": [], "reliability_required": false, "must_not_claim": []}
+    },
+    {
+      "id": "A05", "category": "ambiguous", "query": "หาพื้นที่เกษตรขนาดประมาณใหญ่",
+      "gold": {"mode": "spatial", "classes": {"class_id": "R2"}, "parameters": {"min_area": null}, "expected_tools": [], "clarification_required": true, "clarification_topic": "minimum_area", "unsupported": false, "knowledge_topics": [], "reliability_required": false, "must_not_claim": []}
+    },
+    {
+      "id": "A06", "category": "ambiguous", "query": "หาพื้นที่ที่เหมาะสมที่สุดใกล้น้ำ",
+      "gold": {"mode": "spatial", "classes": {"target_class_id": "R4"}, "parameters": {"suitability_criteria": null}, "expected_tools": [], "clarification_required": true, "clarification_topic": "suitability_criteria", "unsupported": false, "knowledge_topics": [], "reliability_required": false, "must_not_claim": ["fabricated suitability score"]}
+    },
+
+    {
+      "id": "U01", "category": "unsupported", "query": "หาสวนลำไยใกล้น้ำ",
+      "gold": {"mode": "spatial", "classes": {"supported_parent_class": "R2"}, "parameters": {}, "expected_tools": [], "clarification_required": true, "unsupported": true, "knowledge_topics": ["land_cover_taxonomy"], "reliability_required": false, "must_not_claim": ["system can identify longan orchard"], "unsupported_capabilities": ["fine_grained_class"]}
+    },
+    {
+      "id": "U02", "category": "unsupported", "query": "หานาข้าวที่มีผลผลิตสูง",
+      "gold": {"mode": "spatial", "classes": {"supported_parent_class": "R2"}, "parameters": {}, "expected_tools": [], "clarification_required": true, "unsupported": true, "knowledge_topics": ["land_cover_taxonomy"], "reliability_required": false, "must_not_claim": ["rice yield", "high yield"], "unsupported_capabilities": ["fine_grained_class", "yield_data"]}
+    },
+    {
+      "id": "U03", "category": "unsupported", "query": "หาป่าดิบชื้นโดยเฉพาะ",
+      "gold": {"mode": "spatial", "classes": {"supported_parent_class": "R3"}, "parameters": {}, "expected_tools": [], "clarification_required": true, "unsupported": true, "knowledge_topics": ["land_cover_taxonomy"], "reliability_required": false, "must_not_claim": ["R3 means tropical rainforest"], "unsupported_capabilities": ["forest_subtype"]}
+    },
+    {
+      "id": "U04", "category": "unsupported", "query": "หาพื้นที่ที่มีคนอาศัยหนาแน่นที่สุด",
+      "gold": {"mode": "spatial", "classes": {}, "parameters": {}, "expected_tools": [], "clarification_required": false, "unsupported": true, "knowledge_topics": [], "reliability_required": false, "must_not_claim": ["population density inferred from R1"], "unsupported_capabilities": ["population_density"]}
+    },
+    {
+      "id": "U05", "category": "unsupported", "query": "หาพื้นที่เกษตรที่เจ้าของที่ดินอายุมากกว่า 60 ปี",
+      "gold": {"mode": "spatial", "classes": {"supported_parent_class": "R2"}, "parameters": {}, "expected_tools": [], "clarification_required": false, "unsupported": true, "knowledge_topics": [], "reliability_required": false, "must_not_claim": ["owner age", "land ownership"], "unsupported_capabilities": ["ownership_data", "demographic_data"]}
+    },
+    {
+      "id": "U06", "category": "unsupported", "query": "หาพื้นที่ที่มีความเสี่ยงน้ำท่วมสูงที่สุด",
+      "gold": {"mode": "spatial", "classes": {}, "parameters": {}, "expected_tools": [], "clarification_required": false, "unsupported": true, "knowledge_topics": [], "reliability_required": false, "must_not_claim": ["flood risk score"], "unsupported_capabilities": ["flood_risk"]}
+    }
+  ]
+}

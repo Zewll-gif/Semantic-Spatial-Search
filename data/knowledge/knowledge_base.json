@@ -1,0 +1,61 @@
+{
+  "knowledge_base_id": "A7T_PROJECT_KB_V2",
+  "documents": [
+    {
+      "id": "taxonomy-revised7",
+      "category": "land_cover_taxonomy",
+      "title": "Revised 7-class land-cover taxonomy",
+      "content": "The operational model uses R1 Built-up & Impervious, R2 Agricultural Land / Cropland, R3 Tree / Woody Cover, R4 Water, R5 Grassland / Herbaceous, R6 Bare Ground, and R7 Uncertain / Cloud QA. Orchard, rice, forest, urban, and named crop species are not separate model classes. R7 is a QA/uncertainty class rather than a normal physical land-cover class.",
+      "source": "backend/config/class_schema.json"
+    },
+    {
+      "id": "model-a7t",
+      "category": "model_metadata",
+      "title": "A7-T operational model identity",
+      "content": "A7-T is a scratch-trained custom U-Net semantic-segmentation model using PlanetScope RGBN input. Source bands 3,2,1,4 are arranged as model tensor R,G,B,NIR. It predicts Revised 7-class logits on 512x512 tiles. The operational loss is Tversky with alpha=0.3 and beta=0.7. It has 7,763,527 parameters and uses no pretrained weights.",
+      "source": "D:/499_2/499_Thesis_Final_PUBLISH/FINAL_A7T_LOCK/00_A7T_FINAL_LOCK/A7T_FINAL_OPERATIONAL_MODEL_LOCK.md"
+    },
+    {
+      "id": "validation-a7t",
+      "category": "validation_limitations",
+      "title": "A7-T validation context and limitations",
+      "content": "Across seeds 42,43,44 on fixed VAL4, A7-T achieved Accuracy 0.753295 +/- 0.011958, mIoU 0.510561 +/- 0.012635, Macro F1 0.654183 +/- 0.011013, and Cohen's Kappa 0.654559 +/- 0.018798. Fixed VAL4 contains four tiles and was reused during development/model selection, so it is not an independent test. TEST40 contains 40 deployment tiles but has no Ground Truth. Full AOI outputs are model predictions and must not be interpreted as independently validated land-cover truth.",
+      "source": "D:/499_2/499_Thesis_Final_PUBLISH/FINAL_A7T_LOCK/00_A7T_FINAL_LOCK/A7T_FINAL_OPERATIONAL_MODEL_LOCK.md"
+    },
+    {
+      "id": "validation-class-metrics",
+      "category": "validation_limitations",
+      "title": "A7-T class-level fixed-VAL4 metrics",
+      "content": "A7-T multi-seed class-level validation means are: R1 F1 0.790578 IoU 0.653720; R2 F1 0.707615 IoU 0.548300; R3 F1 0.836568 IoU 0.719136; R4 F1 0.763043 IoU 0.617139; R5 F1 0.472383 IoU 0.309281; R6 F1 0.354909 IoU 0.215788. R7 has no support in fixed VAL4 and no metric may be fabricated. These are class-level validation metrics, never polygon confidence.",
+      "source": "D:/499_2/499_Thesis_Final_PUBLISH/FINAL_A7T_LOCK/00_A7T_FINAL_LOCK/A7T_FINAL_OPERATIONAL_MODEL_LOCK.md"
+    },
+    {
+      "id": "test-gt4-final",
+      "category": "validation_limitations",
+      "title": "Final TEST-GT4 evaluation of A7-T",
+      "content": "The frozen A7-T model was evaluated on the frozen TEST-GT4 set after model selection. TEST-GT4 contains 1,047,772 evaluated pixels. Aggregate results are Accuracy 0.886618, mIoU 0.745407, Macro F1 0.848154, and Cohen's Kappa 0.843350. These are test-set aggregate metrics and are not polygon-level confidence values.",
+      "source": "D:/499_2/499_Thesis_Final_PUBLISH/FINAL_A7T_LOCK/00_A7T_FINAL_LOCK/FINAL_A7T_PROJECT_STATUS.md"
+    },
+    {
+      "id": "full-aoi-a7t",
+      "category": "deployment_metadata",
+      "title": "A7-T Full AOI deployment",
+      "content": "The frozen A7-T Full AOI deployment contains 323 tiles: 288 full tiles and 35 edge tiles, with zero failed tiles. The clean vector layer contains 155,199 features. Full AOI class percentages are R1 32.80%, R2 16.36%, R3 32.44%, R4 2.54%, R5 14.20%, R6 1.66%, and R7 0.00%. These are model predictions, not Ground Truth.",
+      "source": "D:/499_2/499_Thesis_Final_PUBLISH/FINAL_A7T_LOCK/00_A7T_FINAL_LOCK/FINAL_A7T_PROJECT_STATUS.md; A7T_FINAL_OPERATIONAL_MODEL_LOCK.md"
+    },
+    {
+      "id": "tools-deterministic-gis",
+      "category": "tool_api_documentation",
+      "title": "Deterministic GIS tool boundary",
+      "content": "search_landcover, filter_by_area, find_nearby, calculate_distance, intersects, get_feature_details, get_ndvi_stats, get_ndwi_stats, get_geojson, and get_evidence operate on project vector/raster artifacts. Area and distance are calculated in EPSG:32647. GeoJSON is returned in EPSG:4326. An LLM may orchestrate these tools but may not calculate or invent spatial values.",
+      "source": "agent_tools_v2.json; backend/geoai_api.py"
+    },
+    {
+      "id": "tools-spectral",
+      "category": "tool_api_documentation",
+      "title": "NDVI and NDWI limitations",
+      "content": "NDVI and NDWI statistics are calculated from source-aligned rasters for an existing feature or supplied geometry. They are supporting spectral evidence and are not Ground Truth, crop identification, flood truth, or calibrated model confidence. If coverage is unavailable, the tool returns a structured unavailable_data error.",
+      "source": "backend/geoai_api.py; D:/499_4/FINAL_ANALYSIS/SPECTRAL_INDICES"
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "audit_date": "2026-09-17",
+  "secrets_file": "D:/499_2/semantic_search_app/backend/.env",
+  "secrets_values_recorded": false,
+  "postgis": {
+    "connected": true,
+    "schema": "geoai_a7t",
+    "table": "geoai_a7t.landcover_polygons",
+    "polygon_count": 155199,
+    "data_loaded": true,
+    "spatial_index": "landcover_polygons_geom_gist",
+    "source_artifact_modified": false,
+    "application_transaction_mode": "read_only",
+    "parameterized_sql_only": true,
+    "configured_role_is_select_only": false
+  },
+  "source_vector": {
+    "path": "D:/499_4/FINAL_ANALYSIS/A7_T_VECTOR_BACKEND/vector_clean/A7_T_FULL_AOI_POLYGONS_CLEAN.gpkg",
+    "model": "A7-T",
+    "model_version": "A7_RGBN_REVISED7_TVERSKY",
+    "crs": "EPSG:32647",
+    "count_and_area_qa": "PASS"
+  },
+  "openai": {
+    "model": "gpt-5.6-terra",
+    "key_present": true,
+    "model_access_http": 200,
+    "live_generation_enabled": true,
+    "paid_generation_calls_made": 1,
+    "planner_role": "structured_intent_only",
+    "database_rows_sent_to_model": false
+  },
+  "canonical_query": {
+    "description": "R2 larger than 5 rai within 300 m of R4",
+    "endpoint": "/api/agent/query",
+    "status": "success",
+    "result_count": 3,
+    "gis_backend": "postgis",
+    "tool": "find_nearby",
+    "llm_used": false,
+    "observed_seconds": 29.28
+  },
+  "paid_smoke_test": {
+    "query": "บ่อน้ำ",
+    "endpoint": "/api/agent/query",
+    "status": "success",
+    "mode": "spatial",
+    "source_class_id": "R4",
+    "result_count": 5,
+    "geojson_feature_count": 5,
+    "llm_used": true,
+    "llm_mode": "structured_intent",
+    "gis_backend": "postgis",
+    "database_rows_sent_to_model": false
+  },
+  "tests": {
+    "full_suite": "41/41 PASS (AGENT_LLM_ENABLED=0 during tests)",
+    "py_compile": "PASS"
+  },
+  "running_app": "http://127.0.0.1:8791/",
+  "remaining_gates": [
+    "Provision a dedicated SELECT-only database role before production exposure",
+    "Optimize canonical proximity-query latency without changing exact spatial semantics"
+  ]
+}

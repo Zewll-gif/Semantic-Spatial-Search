@@ -1,0 +1,13 @@
+{
+  "schema": "A7_REVISED7_V1",
+  "classes": {
+    "R1": {"name": "Built-up & Impervious", "color": "#E53935"},
+    "R2": {"name": "Agricultural Land / Cropland", "color": "#FF9800"},
+    "R3": {"name": "Tree / Woody Cover", "color": "#2E7D32"},
+    "R4": {"name": "Water", "color": "#1976D2"},
+    "R5": {"name": "Grassland / Herbaceous", "color": "#8BC34A"},
+    "R6": {"name": "Bare Ground", "color": "#795548"},
+    "R7": {"name": "Uncertain / Cloud QA", "color": "#9E9E9E"}
+  },
+  "note": "สี canonical ที่ใช้ร่วมกันในผล A7-T และหน้าเว็บ"
+}

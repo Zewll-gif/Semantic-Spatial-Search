@@ -1,0 +1,6 @@
+{
+  "scope": "FULL_AOI",
+  "model": "A7_RGBN_REVISED7_TVERSKY",
+  "feature_count": 323,
+  "schema_version": "compatible_with_A7_CE"
+}

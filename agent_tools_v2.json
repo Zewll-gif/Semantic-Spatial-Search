@@ -1,0 +1,121 @@
+{
+  "version": "2.0.0",
+  "canonical_schema": "backend/config/class_schema.json",
+  "rules": {
+    "class_input": "canonical R1-R7 only",
+    "area_crs": "EPSG:32647",
+    "distance_crs": "EPSG:32647",
+    "geojson_crs": "EPSG:4326",
+    "llm_must_not_calculate_gis_values": true
+  },
+  "standard_error": {
+    "type": "object",
+    "required": ["status", "error"],
+    "properties": {
+      "status": {"const": "error"},
+      "error": {"type": "object", "required": ["code", "message"], "properties": {"code": {"enum": ["no_result", "clarification_required", "unsupported_class", "unavailable_data", "tool_error", "invalid_parameter"]}, "message": {"type": "string"}}}
+    }
+  },
+  "tools": [
+    {
+      "name": "search_landcover",
+      "description": "Find A7-T prediction polygons by canonical Revised-7 class within an optional bbox/geometry.",
+      "input_schema": {"type": "object", "required": ["class_id"], "properties": {"class_id": {"enum": ["R1", "R2", "R3", "R4", "R5", "R6", "R7"]}, "bbox": {"type": ["array", "null"], "items": {"type": "number"}, "minItems": 4, "maxItems": 4}, "geometry": {"type": ["object", "null"]}, "limit": {"type": "integer", "minimum": 1, "maximum": 100}}},
+      "output_schema": {"type": "object", "required": ["feature_ids", "count", "summary", "geojson"]},
+      "validation": ["canonical class id only", "bbox and geometry are mutually exclusive", "limit 1..100"],
+      "error_response": {"status": "error", "error": {"code": "invalid_parameter", "message": "bbox must be [min_lon,min_lat,max_lon,max_lat]"}},
+      "example_call": {"class_id": "R2", "limit": 5},
+      "example_response": {"feature_ids": [101, 102], "count": 2, "summary": "2 R2 features", "geojson": {"type": "FeatureCollection", "features": []}}
+    },
+    {
+      "name": "filter_by_area",
+      "description": "Filter existing feature IDs or a canonical class using GIS-computed polygon area.",
+      "input_schema": {"type": "object", "properties": {"feature_ids": {"type": "array", "items": {"type": "integer"}}, "class_id": {"enum": ["R1", "R2", "R3", "R4", "R5", "R6", "R7"]}, "min_area": {"type": "number", "minimum": 0}, "max_area": {"type": ["number", "null"], "minimum": 0}, "unit": {"enum": ["sqm", "rai", "hectare"]}}},
+      "output_schema": {"type": "object", "required": ["filtered_ids", "count", "area_values"]},
+      "validation": ["feature_ids or class_id required", "area >= 0", "max_area >= min_area", "supported unit required"],
+      "error_response": {"status": "error", "error": {"code": "invalid_parameter", "message": "max_area must be >= min_area"}},
+      "example_call": {"class_id": "R2", "min_area": 5, "unit": "rai"},
+      "example_response": {"filtered_ids": [101], "count": 1, "area_values": [{"feature_id": 101, "area": 6.2, "unit": "rai", "area_sqm": 9920}]}
+    },
+    {
+      "name": "find_nearby",
+      "description": "Find source prediction polygons whose true geometry distance to a target class is within a required threshold.",
+      "input_schema": {"type": "object", "required": ["target_class_id", "max_distance_m"], "properties": {"source_class_id": {"enum": ["R1", "R2", "R3", "R4", "R5", "R6", "R7"]}, "source_feature_ids": {"type": "array", "items": {"type": "integer"}}, "target_class_id": {"enum": ["R1", "R2", "R3", "R4", "R5", "R6", "R7"]}, "max_distance_m": {"type": "number", "exclusiveMinimum": 0}, "limit": {"type": "integer", "minimum": 1, "maximum": 100}}},
+      "output_schema": {"type": "object", "required": ["matching_source_features", "count", "geojson"]},
+      "validation": ["source class or IDs required", "max_distance_m > 0", "no implicit distance default"],
+      "error_response": {"status": "error", "error": {"code": "invalid_parameter", "message": "max_distance_m must be > 0"}},
+      "example_call": {"source_class_id": "R2", "target_class_id": "R4", "max_distance_m": 300},
+      "example_response": {"matching_source_features": [{"feature_id": 101, "nearest_distance_m": 84.2}], "count": 1, "geojson": {"type": "FeatureCollection", "features": []}}
+    },
+    {
+      "name": "calculate_distance",
+      "description": "Calculate exact minimum geometry-to-geometry distance in meters.",
+      "input_schema": {"type": "object", "required": ["source_feature_id", "target_feature_id"], "properties": {"source_feature_id": {"type": "integer", "minimum": 1}, "target_feature_id": {"type": "integer", "minimum": 1}}},
+      "output_schema": {"type": "object", "required": ["source_feature_id", "target_feature_id", "distance_m"]},
+      "validation": ["both feature IDs must exist"],
+      "error_response": {"status": "error", "error": {"code": "no_result", "message": "feature_id not found"}},
+      "example_call": {"source_feature_id": 101, "target_feature_id": 202},
+      "example_response": {"source_feature_id": 101, "target_feature_id": 202, "distance_m": 84.2}
+    },
+    {
+      "name": "intersects",
+      "description": "Return deterministic intersection relationships between feature IDs or canonical classes.",
+      "input_schema": {"type": "object", "properties": {"source_feature_id": {"type": "integer"}, "source_class_id": {"type": "string"}, "target_feature_id": {"type": "integer"}, "target_class_id": {"type": "string"}, "limit": {"type": "integer", "minimum": 1, "maximum": 100}}},
+      "output_schema": {"type": "object", "required": ["relationships", "count"]},
+      "validation": ["one source selector and one target selector required", "canonical classes only"],
+      "error_response": {"status": "error", "error": {"code": "invalid_parameter", "message": "target feature/class is required"}},
+      "example_call": {"source_class_id": "R2", "target_class_id": "R4", "limit": 10},
+      "example_response": {"relationships": [], "count": 0}
+    },
+    {
+      "name": "get_feature_details",
+      "description": "Get canonical class, GIS area, centroid, geometry, and model provenance for one prediction feature.",
+      "input_schema": {"type": "object", "required": ["feature_id"], "properties": {"feature_id": {"type": "integer", "minimum": 1}}},
+      "output_schema": {"type": "object", "required": ["type", "id", "geometry", "properties"]},
+      "validation": ["feature must exist"],
+      "error_response": {"status": "error", "error": {"code": "no_result", "message": "feature_id not found"}},
+      "example_call": {"feature_id": 101},
+      "example_response": {"type": "Feature", "id": 101, "geometry": {}, "properties": {"class_id": "R2", "source_model": "A7-T"}}
+    },
+    {
+      "name": "get_ndvi_stats",
+      "description": "Calculate NDVI min/max/mean/median and distribution statistics from the source-aligned raster.",
+      "input_schema": {"type": "object", "properties": {"feature_id": {"type": "integer", "minimum": 1}, "geometry": {"type": "object"}}},
+      "output_schema": {"type": "object", "required": ["index", "count", "mean", "median", "min", "max"]},
+      "validation": ["exactly one feature_id or geometry required"],
+      "error_response": {"status": "error", "error": {"code": "unavailable_data", "message": "No NDVI pixels available for this geometry"}},
+      "example_call": {"feature_id": 101},
+      "example_response": {"index": "NDVI", "count": 120, "mean": 0.42, "median": 0.44, "min": 0.1, "max": 0.8}
+    },
+    {
+      "name": "get_ndwi_stats",
+      "description": "Calculate NDWI min/max/mean/median and distribution statistics from the source-aligned raster.",
+      "input_schema": {"type": "object", "properties": {"feature_id": {"type": "integer", "minimum": 1}, "geometry": {"type": "object"}}},
+      "output_schema": {"type": "object", "required": ["index", "count", "mean", "median", "min", "max"]},
+      "validation": ["exactly one feature_id or geometry required"],
+      "error_response": {"status": "error", "error": {"code": "unavailable_data", "message": "No NDWI pixels available for this geometry"}},
+      "example_call": {"feature_id": 101},
+      "example_response": {"index": "NDWI", "count": 120, "mean": -0.12, "median": -0.1, "min": -0.5, "max": 0.3}
+    },
+    {
+      "name": "get_geojson",
+      "description": "Return a valid EPSG:4326 GeoJSON FeatureCollection for an explicit result set.",
+      "input_schema": {"type": "object", "required": ["feature_ids"], "properties": {"feature_ids": {"type": "array", "minItems": 1, "maxItems": 100, "items": {"type": "integer"}}}},
+      "output_schema": {"type": "object", "required": ["type", "features"], "properties": {"type": {"const": "FeatureCollection"}, "features": {"type": "array"}}},
+      "validation": ["feature_ids cannot be empty", "maximum 100 IDs"],
+      "error_response": {"status": "error", "error": {"code": "invalid_parameter", "message": "feature_ids cannot be empty"}},
+      "example_call": {"feature_ids": [101, 102]},
+      "example_response": {"type": "FeatureCollection", "features": []}
+    },
+    {
+      "name": "get_evidence",
+      "description": "Assemble model, canonical class, spatial, NDVI/NDWI, and available external context for a feature.",
+      "input_schema": {"type": "object", "required": ["feature_id"], "properties": {"feature_id": {"type": "integer", "minimum": 1}}},
+      "output_schema": {"type": "object", "required": ["feature", "model", "spatial_evidence", "spectral_evidence", "external_comparison"]},
+      "validation": ["feature must exist", "spectral coverage required for NDVI/NDWI values"],
+      "error_response": {"status": "error", "error": {"code": "unavailable_data", "message": "Spectral evidence is unavailable"}},
+      "example_call": {"feature_id": 101},
+      "example_response": {"feature": {}, "model": {"source_model": "A7-T", "result_type": "model_prediction"}, "spatial_evidence": {}, "spectral_evidence": {}, "external_comparison": {"status": "available_separately"}}
+    }
+  ]
+}

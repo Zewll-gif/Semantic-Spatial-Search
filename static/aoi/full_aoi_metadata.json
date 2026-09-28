@@ -1,0 +1,92 @@
+{
+  "source": "data/rasters/planetscope/planetscope_full_aoi_rgbn.tif",
+  "source_band_count": 4,
+  "source_band_order": {
+    "band_1": "Blue",
+    "band_2": "Green",
+    "band_3": "Red",
+    "band_4": "NIR"
+  },
+  "display_band_order": [
+    3,
+    2,
+    1
+  ],
+  "display_size": {
+    "width": 1038,
+    "height": 1164
+  },
+  "source_size": {
+    "width": 8302,
+    "height": 9308
+  },
+  "downsample_factor": 8,
+  "display_stretch": "independent 2-98 percentile per RGB channel; display-only",
+  "stretches": {
+    "R_band3": [
+      257.0,
+      1649.0
+    ],
+    "G_band2": [
+      328.0,
+      1397.0
+    ],
+    "B_band1": [
+      157.0,
+      1162.0
+    ]
+  },
+  "crs": "EPSG:32647",
+  "transform": [
+    3.0,
+    0.0,
+    488442.0,
+    0.0,
+    -3.0,
+    2091723.0,
+    0.0,
+    0.0,
+    1.0
+  ],
+  "bounds_projected": [
+    488442.0,
+    2063799.0,
+    513348.0,
+    2091723.0
+  ],
+  "bounds_wgs84": {
+    "west": 98.89023907363709,
+    "south": 18.66529982248273,
+    "east": 99.12675969138141,
+    "north": 18.9176840206757,
+    "leaflet_bounds": [
+      [
+        18.66529982248273,
+        98.89023907363709
+      ],
+      [
+        18.9176840206757,
+        99.12675969138141
+      ]
+    ],
+    "corners_latlon": [
+      {
+        "lat": 18.665310493315584,
+        "lon": 98.890402471043
+      },
+      {
+        "lat": 18.66529982248273,
+        "lon": 99.12657098863846
+      },
+      {
+        "lat": 18.91767319498304,
+        "lon": 99.12675969138141
+      },
+      {
+        "lat": 18.9176840206757,
+        "lon": 98.89023907363709
+      }
+    ],
+    "source_crs": "EPSG:32647"
+  }
+}

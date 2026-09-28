@@ -1,0 +1,1 @@
+A7-T promoted operational candidate\nLoss: Tversky alpha=0.3 beta=0.7\nInput: PlanetScope RGBN bands 3,2,1,4\nTRAIN14 / fixed VAL4 / revised7\nOperational seed: 42\nOriginal freeze retained: YES\nTEST40 used for selection: NO\nFull AOI used for selection: NO\n

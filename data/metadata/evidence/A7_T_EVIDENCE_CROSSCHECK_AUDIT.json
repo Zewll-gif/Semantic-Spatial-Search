@@ -1,0 +1,8 @@
+{
+  "model": "A7_RGBN_REVISED7_TVERSKY",
+  "profile_file": "D:\\499_4\\FINAL_ANALYSIS\\EVIDENCE_CROSSCHECK_A7T\\class_spectral_profiles.json",
+  "prediction_conditioned": true,
+  "independent_validation": false,
+  "profile_classes": 7,
+  "TEST40_USED_FOR_SELECTION": "NO"
+}

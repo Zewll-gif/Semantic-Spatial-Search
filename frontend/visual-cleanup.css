@@ -1,0 +1,48 @@
+/*
+CLEAN PROJECT HEADER
+ไฟล์: visual-cleanup.css
+หน้าที่: ส่วนแสดงผลและ interaction ของ GeoAI Explorer
+Input: ข้อมูลจาก API และ static assets
+Output: หน้าเว็บหรือพฤติกรรม UI
+Dependency สำคัญ: backend API และ class schema
+สิ่งที่ต้องระวัง: ห้ามเปลี่ยน taxonomy, model output, CRS หรือหน่วยโดยไม่ตรวจ audit
+*/
+/* Quiet visual hierarchy, with the real aligned Full AOI RGB/prediction pair. */
+.experience-hero::after{display:none}
+.discover-copy::before,.compare-guide{display:none!important}
+.hero-semantic{position:absolute;inset:-4%;z-index:-2;background:url('/aoi/a7t_full_aoi_canonical.png?v=a7t-palette-1') center 43%/cover no-repeat;transform:scale(1.04);pointer-events:none;opacity:0;mask-image:radial-gradient(circle 190px at var(--reveal-x,70%) var(--reveal-y,50%),#000 20%,transparent 100%);-webkit-mask-image:radial-gradient(circle 190px at var(--reveal-x,70%) var(--reveal-y,50%),#000 20%,transparent 100%);transition:opacity .35s}
+.leaflet-image-layer[src*="a7t_full_aoi_canonical"],.compare-prediction{image-rendering:pixelated}
+.compact-legend{transform:translateY(-60px);z-index:1100}
+@media(max-width:700px){.compact-legend{transform:translateY(-175px);z-index:1100;max-width:calc(100vw - 24px)}}
+.experience-hero.is-revealing .hero-semantic{opacity:1}
+.hero-shade{pointer-events:none}
+.hero-content{align-items:center;padding:clamp(140px,16vh,220px) 6.5vw 110px;min-height:calc(100svh - 154px)}
+.hero-copy{max-width:min(1060px,78vw)}
+.hero-copy h1{font-family:var(--thai);font-size:clamp(2.7rem,4.2vw,5.25rem);font-weight:500;line-height:1.18;letter-spacing:-.045em;margin:0 0 24px;max-width:1050px;text-wrap:pretty}
+.hero-copy h1 strong{font-family:var(--display);font-weight:750;color:#d5efa8;white-space:nowrap;letter-spacing:-.055em}
+.hero-copy h1 em{font-family:var(--display);font-size:.85em;font-weight:600;color:#f0f7eb;letter-spacing:-.04em}
+.hero-copy p{margin-top:0;max-width:620px}
+.hero-scene-card{align-self:flex-end;min-height:0;flex:0 0 185px;min-width:0;padding:18px 20px;border-radius:14px;background:rgba(8,28,21,.36)}
+.scene-index{font-size:clamp(3.2rem,4vw,4.4rem);margin:0}
+.scene-index span{text-transform:none;font-size:12px;letter-spacing:0;margin-top:5px}
+.hero-scene-card p{margin:17px 0 0;font-size:11px}
+.hero-bottom{letter-spacing:0;font-size:12px}
+.hero-bottom a{letter-spacing:0}
+.hero-nav-links{gap:25px}
+.hero-text-link{font-weight:600}
+/* Remove editorial numbering and redundant captions; preserve actionable and interpretive labels. */
+.discover-step,.tile-card-head>span,.tour-topline,.tour-step-label,.tour-scroll-hint,.brand-lockup .eyebrow,.assistant-section>.panel-kicker,.results-section .panel-kicker,.evidence-panel>.panel-kicker,.workspace-layers .panel-kicker,.analysis-builder .panel-kicker,.thesis-panel>.panel-kicker{display:none!important}
+.discover-copy h2,.tour-copy h2{margin-top:0}
+.tile-card-head{justify-content:flex-end}
+.atlas-heading{justify-content:flex-end;letter-spacing:0;text-transform:none;font-size:12px}
+.atlas-heading span{color:#355e4a!important}
+.tour-detail figcaption span:last-child{display:none}
+.tour-hotspot-label small{display:none}
+.tour-step-buttons button{width:auto;min-width:54px;height:34px;padding:0 10px;border-radius:999px;font-family:var(--thai);font-size:11px}
+.brand-lockup{gap:0}
+.brand-lockup h1{margin:0}
+.panel-section h2,.evidence-panel h2{margin-top:0}
+.workspace-layers summary h2{margin:0}
+@media(max-width:1050px){.hero-copy{max-width:78vw}.hero-copy h1{font-size:clamp(2.35rem,4.5vw,4.2rem)}.hero-scene-card{flex-basis:150px;padding:14px}.scene-index{font-size:3rem}}
+@media(max-width:760px){.hero-content{padding:23vh 22px 145px;min-height:calc(100svh - 70px)}.hero-copy{max-width:100%}.hero-copy h1{font-size:clamp(2.1rem,8.2vw,3.6rem);line-height:1.22}.hero-copy h1 strong{white-space:normal}.hero-copy p{font-size:14px}.hero-scene-card{display:none}.hero-bottom{font-size:10px}.hero-semantic{opacity:.55;mask-image:radial-gradient(circle 32vw at 70% 38%,#000 15%,transparent 100%);-webkit-mask-image:radial-gradient(circle 32vw at 70% 38%,#000 15%,transparent 100%)}.atlas-heading{justify-content:space-between}.tour-step-buttons{gap:3px}.tour-step-buttons button{min-width:0;width:auto;height:30px;padding:0 6px;font-size:9px}}
+@media(prefers-reduced-motion:reduce){.hero-semantic{transition:none}.experience-hero.is-revealing .hero-semantic{opacity:.72}}

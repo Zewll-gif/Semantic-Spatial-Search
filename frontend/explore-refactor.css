@@ -1,0 +1,137 @@
+/* Explore layout refactor: compact search, numbered map markers, one toolbar. */
+#explore .left-panel{
+  top:105px!important;bottom:auto!important;left:50%!important;right:auto!important;
+  width:min(610px,calc(100vw - 520px))!important;max-height:none!important;
+  transform:translateX(-50%)!important;overflow:visible!important;
+  transition:width .35s cubic-bezier(.22,.78,.22,1),transform .35s cubic-bezier(.22,.78,.22,1)!important;
+}
+#explore .assistant-section{
+  padding:5px!important;border-radius:18px!important;
+  background:rgba(8,34,26,.86)!important;box-shadow:0 12px 34px rgba(0,0,0,.22)!important;
+}
+#explore .product-search{min-height:50px!important;border-radius:14px!important;padding:4px!important}
+#explore .product-search textarea{min-height:42px!important;height:42px!important;padding:10px 13px!important;line-height:22px!important}
+#explore .product-search .primary-btn{width:44px!important;height:44px!important;border-radius:12px!important}
+#explore .product-progress,#explore .product-error{margin:6px 9px 3px!important;font-size:10px!important}
+body.search-has-results #explore .left-panel{width:min(390px,calc(100vw - 460px))!important}
+body.search-has-results #explore .assistant-section{background:rgba(8,34,26,.78)!important}
+body.search-has-results #explore .example-chips{display:none!important}
+
+/* Results live in one collapsible sidebar, never as large cards over the map. */
+#explore .right-panel{
+  top:92px!important;right:18px!important;bottom:18px!important;
+  width:clamp(320px,25vw,380px)!important;padding:13px!important;border-radius:22px!important;
+}
+#explore .right-panel.has-query-results>.evidence-panel{display:none!important}
+#explore .product-result-cards{max-height:44vh!important;gap:6px!important;padding-right:2px}
+#explore .product-result-card{
+  position:relative;display:grid;grid-template-columns:31px 1fr;column-gap:9px;
+  padding:9px 10px!important;border-radius:12px!important;min-height:61px;
+}
+#explore .product-result-card .result-card-number{
+  grid-row:1/3;display:grid;place-items:center;align-self:center;width:27px;height:27px;
+  margin:0!important;border:2px solid #fff;border-radius:50%;color:#fff;background:var(--result-color,#176a49);
+  box-shadow:0 2px 9px rgba(0,0,0,.17);font:700 11px/1 Inter,sans-serif;
+}
+#explore .product-result-card strong{grid-column:2;font-size:11px!important;line-height:1.25}
+#explore .product-result-card>span:last-child{grid-column:2;font-size:10px!important;margin-top:2px!important}
+#explore .product-result-card.is-selected{border-color:#245f4d!important;background:#e7f1e8!important;box-shadow:0 0 0 2px rgba(36,95,77,.16)!important}
+
+.result-callout-icon,.result-callout{display:none!important}
+.result-number-marker{background:transparent!important;border:0!important}
+.result-number{
+  display:grid;place-items:center;width:30px;height:30px;padding:0;border:2px solid #fff;border-radius:50%;
+  color:#fff;background:var(--result-color,#176a49);box-shadow:0 4px 13px rgba(0,0,0,.36);
+  font:800 11px/1 Inter,sans-serif;cursor:pointer;transition:transform .16s,box-shadow .16s;
+}
+.result-number:hover,.result-number:focus-visible,.result-number.is-hovered,.result-number.is-selected{
+  transform:scale(1.2);box-shadow:0 0 0 4px rgba(255,255,255,.35),0 5px 16px rgba(0,0,0,.42);
+}
+.product-result-polygon{transition:fill-opacity .16s,stroke-opacity .16s}
+.selected-result-leaflet-popup .leaflet-popup-content-wrapper{
+  border:1px solid rgba(30,82,65,.2);border-radius:15px;background:rgba(252,252,248,.97);box-shadow:0 16px 38px rgba(0,22,14,.25);
+}
+.selected-result-leaflet-popup .leaflet-popup-content{margin:12px 14px;min-width:176px}
+.selected-result-popup{display:grid;gap:3px;color:#173b30}
+.selected-result-popup .selected-result-index{font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#71877c}
+.selected-result-popup strong{font-size:13px}.selected-result-popup>span:not(.selected-result-index){font-size:10px;color:#667d72}.selected-result-popup b{margin-top:3px;font-size:15px}
+.selected-result-popup .selected-result-distance{margin-top:5px;padding-top:6px;border-top:1px solid #dce6dc;color:#245f4d!important;font-weight:700}
+
+/* Exact polygon-edge distance: reference outline, shortest line, and readable metric label. */
+.distance-buffer-zone{pointer-events:none;filter:drop-shadow(0 1px 1px rgba(0,0,0,.18))}
+.distance-reference-polygon{filter:drop-shadow(0 2px 3px rgba(0,0,0,.34))}
+.distance-connector-line{filter:drop-shadow(0 1px 1px rgba(0,0,0,.42));cursor:pointer}
+.distance-line-label-icon{background:transparent!important;border:0!important;pointer-events:none!important}
+.distance-line-label{
+  display:grid;place-items:center;min-width:64px;height:24px;padding:0 8px;border:1px solid rgba(19,57,46,.18);
+  border-radius:999px;background:rgba(255,255,255,.94);color:#173b30;box-shadow:0 4px 12px rgba(0,20,13,.25);
+  font:700 10px/1 Inter,"Noto Sans Thai",sans-serif;white-space:nowrap;transition:transform .16s,background .16s;
+}
+.distance-line-label.is-selected{transform:scale(1.1);background:#fff;color:#0b543d;box-shadow:0 0 0 3px rgba(255,255,255,.28),0 5px 15px rgba(0,20,13,.34)}
+.distance-reference-tooltip{border:0!important;border-radius:9px!important;background:rgba(12,45,35,.92)!important;color:#fff!important;box-shadow:0 6px 18px rgba(0,0,0,.24)!important;font:600 10px/1.3 Inter,"Noto Sans Thai",sans-serif!important}
+.distance-reference-tooltip::before{border-top-color:rgba(12,45,35,.92)!important}
+.distance-map-key{
+  display:grid;gap:6px;max-width:330px;margin:0 0 58px 12px;padding:9px 11px;border:1px solid rgba(255,255,255,.34);
+  border-radius:11px;background:rgba(8,34,26,.83);color:#fff;box-shadow:0 8px 24px rgba(0,0,0,.24);backdrop-filter:blur(8px);
+  font:600 10px/1.35 Inter,"Noto Sans Thai",sans-serif;transform:translateY(-66px);
+}
+.distance-map-key-row{display:flex;align-items:center;gap:9px;min-width:0}
+.distance-map-key-reference{flex:0 0 34px;height:14px;border:3px solid #62cfff;border-radius:3px;background:var(--distance-reference-color,#fff);box-shadow:0 1px 3px rgba(0,0,0,.28)}
+.distance-map-key-zone{flex:0 0 34px;height:14px;border:1px dashed rgba(255,255,255,.95);border-radius:3px;background:color-mix(in srgb,var(--distance-zone-color,#fff) 42%,transparent)}
+.distance-map-key-line{flex:0 0 34px;height:2px;border-top:2px dashed #fff;filter:drop-shadow(0 1px 1px rgba(0,0,0,.55))}
+#explore .distance-result-scope{padding:8px 10px;border-left:3px dashed #fff;border-radius:8px;background:#edf4ee;color:#244f41;font-weight:600}
+
+/* One compact bottom-left control; tools expand inside the same container. */
+#explore .map-toolbar{
+  left:20px!important;right:auto!important;bottom:18px!important;width:auto!important;max-width:calc(100vw - 420px)!important;
+  min-height:44px!important;max-height:none!important;padding:5px!important;gap:5px!important;
+  display:flex!important;align-items:center!important;flex-wrap:nowrap!important;
+  opacity:1!important;pointer-events:auto!important;transform:none!important;border-radius:16px!important;
+}
+#explore .map-toolbar>.toolbar-tools,#explore .map-toolbar>.toolbar-action-group,#explore .map-toolbar>.map-stat{display:none!important}
+#explore .map-toolbar.is-open>.toolbar-tools,#explore .map-toolbar.is-open>.toolbar-action-group{display:flex!important}
+#explore .cinematic-tools-toggle{
+  position:static!important;left:auto!important;bottom:auto!important;min-height:34px!important;padding:0 12px!important;
+  flex:0 0 auto;border-radius:11px!important;box-shadow:none!important;background:rgba(255,255,255,.08)!important;
+}
+#explore .map-toolbar button{min-height:34px!important;padding:6px 9px!important;font-size:10px!important}
+#explore .map-toolbar.is-open{max-width:calc(100vw - 420px)!important;overflow-x:auto!important;scrollbar-width:none}
+#explore .map-toolbar.is-open::-webkit-scrollbar{display:none}
+
+/* The old ribbon is only the collapsed panel re-opener. */
+#explore .cinematic-result-ribbon{right:82px!important;bottom:18px!important;min-height:42px!important;padding:6px 12px!important}
+#explore .right-panel.is-open~.cinematic-result-ribbon{display:none!important}
+#explore .compact-legend{right:18px!important;bottom:18px!important}
+
+@media(max-width:900px){
+  #explore .left-panel,body.search-has-results #explore .left-panel{top:72px!important;width:min(430px,calc(100vw - 190px))!important}
+  #explore .right-panel{width:clamp(320px,38vw,360px)!important}
+  #explore .map-toolbar,#explore .map-toolbar.is-open{max-width:calc(100vw - 28px)!important}
+}
+
+@media(max-width:760px){
+  #explore .left-panel,body.search-has-results #explore .left-panel{
+    top:70px!important;left:10px!important;right:10px!important;width:auto!important;transform:none!important;
+  }
+  #explore .assistant-section{padding:4px!important;border-radius:15px!important}
+  #explore .product-search{min-height:46px!important}
+  #explore .product-search textarea{min-height:38px!important;height:38px!important}
+  #explore .product-search .primary-btn{width:40px!important;height:40px!important}
+  body.search-has-results #explore .left-panel{right:62px!important}
+  #explore .right-panel,#explore .right-panel.has-query-results{left:8px!important;right:8px!important;bottom:24px!important;width:auto!important;max-height:68vh!important}
+  #explore .product-result-cards{max-height:31vh!important}
+  #explore .map-toolbar,#explore .map-toolbar.is-open{
+    left:8px!important;right:auto!important;bottom:8px!important;width:auto!important;max-width:calc(100vw - 16px)!important;
+    min-height:42px!important;max-height:46px!important;
+  }
+  #explore .map-toolbar.is-open{width:calc(100vw - 16px)!important}
+  #explore .cinematic-result-ribbon{right:8px!important;bottom:62px!important;max-width:calc(100vw - 16px)}
+  #explore .compact-legend{right:8px!important;bottom:112px!important}
+  .result-number{width:27px;height:27px;font-size:10px}
+  .distance-map-key{max-width:245px;margin:0 0 108px 2px;padding:7px 9px;font-size:9px;transform:translateY(-114px)}
+  body.results-open .distance-map-key,
+  body.results-open #explore .map-toolbar,
+  body.results-open #explore .compact-legend,
+  body.results-open #explore .leaflet-control-layers{display:none!important}
+  .distance-line-label{min-width:56px;height:22px;padding:0 6px;font-size:9px}
+}

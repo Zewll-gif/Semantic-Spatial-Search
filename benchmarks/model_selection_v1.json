@@ -1,0 +1,37 @@
+{
+  "selection_date": "2026-09-16",
+  "status": "predefined_locked_candidates",
+  "models": {
+    "openai": "gpt-5.6-terra",
+    "gemini": "gemini-3.8-flash",
+    "anthropic": "claude-sonnet-5"
+  },
+  "inclusion_criteria": [
+    "API model active and available at experiment date",
+    "Supports tool/function calling",
+    "Supports structured output or schema-constrained tool arguments",
+    "Suitable for general-purpose/agentic orchestration",
+    "Not selected solely for being the provider's most expensive flagship model",
+    "Cost and latency can be measured through the API"
+  ],
+  "sampling_policy": {
+    "temperature": "omit",
+    "top_p": "omit",
+    "top_k": "omit",
+    "seed": "omit_when_unsupported",
+    "default_configuration": "provider_model_default",
+    "consistency_measure": "three_independent_repeated_runs",
+    "actual_provider_defaults": "unknown_until_provider_reports_them"
+  },
+  "verification": {
+    "openai": "official_model_documentation",
+    "gemini": "official_model_documentation",
+    "anthropic": "official_model_documentation",
+    "account_level_api_access": "not_tested_no_paid_calls"
+  },
+  "sources": {
+    "openai": "https://developers.openai.com/api/docs/models/gpt-5.6-terra",
+    "gemini": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash",
+    "anthropic": "https://platform.claude.com/docs/en/models/sonnet-5/whats-new-sonnet-5"
+  }
+}

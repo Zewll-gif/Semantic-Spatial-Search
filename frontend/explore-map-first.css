@@ -1,0 +1,232 @@
+/* Explore-only presentation layer: quiet, map-first, and responsive. */
+.experience-hero .hero-nav { justify-content: flex-end; }
+.experience-hero .hero-nav-links { margin-right: auto; }
+
+#explore {
+  --explore-gap: 18px;
+  --explore-control-height: 48px;
+  position: relative;
+  height: 100dvh;
+  min-height: 620px;
+  overflow: hidden;
+}
+
+/* The old full-width brand header is intentionally absent from the Explore DOM. */
+#explore .scope-strip {
+  position: absolute !important;
+  z-index: 1120;
+  top: var(--explore-gap) !important;
+  left: var(--explore-gap) !important;
+  width: auto !important;
+  height: var(--explore-control-height) !important;
+  padding: 4px !important;
+  display: flex !important;
+  align-items: center;
+  gap: 4px !important;
+  border: 1px solid rgba(255, 255, 255, .28) !important;
+  border-radius: 16px !important;
+  background: rgba(8, 34, 26, .86) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .18) !important;
+  backdrop-filter: blur(16px);
+}
+
+#explore .scope-strip select {
+  width: 142px;
+  height: 38px !important;
+  padding: 0 34px 0 12px !important;
+  border: 0 !important;
+  border-radius: 12px !important;
+  outline: 0;
+  color: #f5f8f2 !important;
+  background-color: rgba(255, 255, 255, .07) !important;
+  font: 600 12px/1 "IBM Plex Sans Thai", Inter, sans-serif !important;
+  text-align: center;
+  text-align-last: center;
+}
+
+#explore .scope-strip select:focus-visible { box-shadow: 0 0 0 3px rgba(169, 214, 111, .42); }
+
+/* Search is the only prominent floating surface. */
+#explore .left-panel,
+body.search-has-results #explore .left-panel {
+  top: var(--explore-gap) !important;
+  bottom: auto !important;
+  left: 50% !important;
+  right: auto !important;
+  width: min(620px, calc(100vw - 540px)) !important;
+  max-height: none !important;
+  overflow: visible !important;
+  transform: translateX(-50%) !important;
+  pointer-events: none;
+}
+
+#explore .left-panel > * { pointer-events: auto; }
+#explore .left-panel > .suggestion-section,
+#explore .assistant-section > .panel-kicker,
+#explore .assistant-section > h2,
+#explore .assistant-section > .muted,
+#explore .assistant-section > .example-chips,
+#explore .assistant-section > .legacy-assistant { display: none !important; }
+
+#explore .assistant-section {
+  padding: 4px !important;
+  border: 1px solid rgba(255, 255, 255, .28) !important;
+  border-radius: 17px !important;
+  background: rgba(8, 34, 26, .86) !important;
+  box-shadow: 0 12px 34px rgba(0, 0, 0, .2) !important;
+  backdrop-filter: blur(16px);
+}
+
+#explore .product-search {
+  width: 100%;
+  min-width: 0;
+  min-height: var(--explore-control-height) !important;
+  padding: 3px !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto !important;
+  align-items: center !important;
+  gap: 6px !important;
+  border: 0 !important;
+  border-radius: 13px !important;
+  background: #f6f8f3 !important;
+}
+
+#explore .product-search:focus-within {
+  box-shadow: 0 0 0 3px rgba(169, 214, 111, .34) !important;
+  transform: none !important;
+}
+
+#explore .product-search textarea {
+  width: 100% !important;
+  min-width: 0 !important;
+  height: 42px !important;
+  min-height: 42px !important;
+  max-height: 92px !important;
+  margin: 0 !important;
+  padding: 10px 13px !important;
+  overflow-y: auto;
+  border: 0 !important;
+  outline: 0;
+  color: #173b30 !important;
+  background: transparent !important;
+  font: 400 13px/22px "IBM Plex Sans Thai", Inter, sans-serif !important;
+  text-align: left;
+  resize: none;
+}
+
+#explore .product-search textarea::placeholder { color: #70877d; opacity: 1; }
+
+#explore .product-search .primary-btn {
+  width: auto !important;
+  min-width: 76px !important;
+  height: 42px !important;
+  min-height: 42px !important;
+  margin: 0 !important;
+  padding: 0 13px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px;
+  overflow: visible !important;
+  border-radius: 11px !important;
+  font: 700 12px/1 "IBM Plex Sans Thai", Inter, sans-serif !important;
+  white-space: nowrap;
+}
+
+#explore .product-search .primary-btn span { font-size: 14px !important; line-height: 1; }
+#explore .product-progress,
+#explore .product-error { margin: 6px 9px 3px !important; text-align: center; }
+
+#explore .explore-thesis-tool {
+  display: none;
+  min-height: 34px;
+  padding: 0 10px;
+  align-items: center;
+  gap: 6px;
+  flex: 0 0 auto;
+  border: 1px solid rgba(255, 255, 255, .14);
+  border-radius: 11px;
+  color: rgba(255, 255, 255, .82);
+  background: rgba(255, 255, 255, .05);
+  font: 500 10px/1 Inter, "IBM Plex Sans Thai", sans-serif;
+  white-space: nowrap;
+}
+
+#explore .map-toolbar.is-open > .explore-thesis-tool { display: flex; }
+#explore .explore-thesis-tool input { margin: 0; accent-color: #a9d66f; }
+
+/* Panels and map controls reserve distinct screen zones. */
+#explore .right-panel { top: 84px !important; bottom: 24px !important; }
+#explore .map-toolbar { left: var(--explore-gap) !important; bottom: 24px !important; }
+#explore .compact-legend { right: var(--explore-gap) !important; bottom: 24px !important; }
+#explore .map-view-panel { top: var(--explore-gap) !important; }
+
+@media (max-width: 1040px) {
+  #explore .left-panel,
+  body.search-has-results #explore .left-panel {
+    top: 76px !important;
+    left: 12px !important;
+    right: 12px !important;
+    width: auto !important;
+    transform: none !important;
+  }
+  #explore .scope-strip { top: 12px !important; left: 12px !important; }
+  #explore .right-panel { top: 138px !important; }
+  #explore .map-view-panel { top: 12px !important; }
+}
+
+@media (max-width: 760px) {
+  #explore {
+    --explore-gap: 8px;
+    --explore-control-height: 46px;
+    min-height: 100dvh;
+  }
+  #explore .scope-strip {
+    top: 8px !important;
+    left: 8px !important;
+    height: 44px !important;
+    border-radius: 14px !important;
+  }
+  #explore .scope-strip select { width: 126px; height: 36px !important; font-size: 11px !important; }
+  #explore .left-panel,
+  body.search-has-results #explore .left-panel {
+    top: 60px !important;
+    left: 8px !important;
+    right: 8px !important;
+    width: auto !important;
+    transform: none !important;
+  }
+  #explore .assistant-section { border-radius: 15px !important; }
+  #explore .product-search { min-height: 46px !important; gap: 4px !important; }
+  #explore .product-search textarea {
+    height: 40px !important;
+    min-height: 40px !important;
+    padding: 9px 10px !important;
+    font-size: 12px !important;
+    line-height: 22px !important;
+  }
+  #explore .product-search .primary-btn {
+    min-width: 66px !important;
+    height: 40px !important;
+    min-height: 40px !important;
+    padding: 0 10px !important;
+    font-size: 11px !important;
+  }
+  body.search-has-results #explore .left-panel { right: 54px !important; }
+  #explore .right-panel { top: auto !important; bottom: 0 !important; }
+  #explore .map-toolbar,
+  #explore .map-toolbar.is-open { left: 8px !important; bottom: 24px !important; }
+  #explore .map-toolbar.is-open > .aoi-draw-menu { bottom: 84px !important; }
+  #explore .map-toolbar.is-open + .map-card .leaflet-control-layers { margin-bottom: 168px !important; }
+  #explore .compact-legend { right: 8px !important; bottom: 78px !important; }
+  #explore .map-view-panel { top: 8px !important; right: 8px !important; }
+}
+
+@media (max-width: 420px) {
+  #explore .product-search .primary-btn { min-width: 58px !important; padding: 0 8px !important; }
+  #explore .product-search .primary-btn span { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #explore *, #explore *::before, #explore *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+}

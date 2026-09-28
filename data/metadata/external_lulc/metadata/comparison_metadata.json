@@ -1,0 +1,909 @@
+{
+  "model": "A7_RGBN_REVISED7_TVERSKY",
+  "source_raster": "D:\\499_4\\FINAL_INFERENCE\\A7_RGBN_REVISED7_TVERSKY_FULL_AOI\\mosaic\\A7_RGBN_REVISED7_TVERSKY_FULL_AOI.tif",
+  "planet_scope": {
+    "date": "2026-02-16",
+    "acquisition_timestamps": [
+      "2026-02-16T04:28:49.383114Z",
+      "2026-02-16T04:28:51.667889Z",
+      "2026-02-16T04:28:53.952665Z",
+      "2026-02-16T04:29:42.732958Z",
+      "2026-02-16T04:29:44.771612Z",
+      "2026-02-16T04:29:46.810266Z",
+      "2026-02-16T04:29:48.848919Z",
+      "2026-02-16T04:31:23.210324Z",
+      "2026-02-16T04:31:25.292854Z",
+      "2026-02-16T04:31:27.375384Z",
+      "2026-02-16T04:34:02.645337Z",
+      "2026-02-16T04:34:04.71703Z",
+      "2026-02-16T04:34:06.788722Z",
+      "2026-02-16T04:34:08.860359Z"
+    ],
+    "source": "D:\\499_2\\image_planet\\files\\composite_metadata.json"
+  },
+  "aoi_shape": [
+    9308,
+    8302
+  ],
+  "common_comparison_crs": "EPSG:32647",
+  "grid": {
+    "width": 2491,
+    "height": 2794,
+    "transform": [
+      10.0,
+      0.0,
+      488440.0,
+      0.0,
+      -10.0,
+      2091730.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  },
+  "gistda": {
+    "status": "PASS",
+    "url": "https://gistdaportal.gistda.or.th/data/rest/services/L09_Landuse/L09_Landuse_GISTDA_50k/MapServer/0",
+    "layer": "L09_LanduseNorth_GISTDA_50k",
+    "feature_count": 1999,
+    "metadata": {
+      "currentVersion": 11.5,
+      "cimVersion": "3.5.0",
+      "id": 0,
+      "name": "gisdata.ugisdata.L09_LanduseNorth_GISTDA_50k",
+      "type": "Feature Layer",
+      "description": "",
+      "geometryType": "esriGeometryPolygon",
+      "sourceSpatialReference": {
+        "wkid": 4326,
+        "latestWkid": 4326,
+        "xyTolerance": 8.98315284119522e-09,
+        "zTolerance": 0.001,
+        "mTolerance": 0.001,
+        "falseX": -400,
+        "falseY": -400,
+        "xyUnits": 999999999.9999999,
+        "falseZ": -100000,
+        "zUnits": 10000,
+        "falseM": -100000,
+        "mUnits": 10000
+      },
+      "spatialReference": {
+        "wkid": 102100,
+        "latestWkid": 3857,
+        "xyTolerance": 0.001,
+        "zTolerance": 0.001,
+        "mTolerance": 0.001,
+        "falseX": -20037700,
+        "falseY": -30241100,
+        "xyUnits": 148923141.92838538,
+        "falseZ": -100000,
+        "zUnits": 10000,
+        "falseM": -100000,
+        "mUnits": 10000
+      },
+      "copyrightText": "",
+      "parentLayer": null,
+      "subLayers": [],
+      "minScale": 0,
+      "maxScale": 0,
+      "referenceScale": 0.0,
+      "drawingInfo": {
+        "renderer": {
+          "type": "uniqueValue",
+          "field1": "lul1_t",
+          "uniqueValueGroups": [
+            {
+              "heading": "LUL1_T",
+              "classes": [
+                {
+                  "label": "พื้นที่ชุมชนและสิ่งปลูกสร้าง",
+                  "description": "พื้นที่ชุมชนและสิ่งปลูกสร้าง",
+                  "symbol": {
+                    "type": "esriSFS",
+                    "style": "esriSFSSolid",
+                    "color": [
+                      255,
+                      115,
+                      223,
+                      255
+                    ],
+                    "outline": {
+                      "type": "esriSLS",
+                      "style": "esriSLSSolid",
+                      "color": [
+                        0,
+                        0,
+                        0,
+                        0
+                      ],
+                      "width": 0.4
+                    }
+                  },
+                  "values": [
+                    [
+                      "พื้นที่ชุมชนและสิ่งปลูกสร้าง"
+                    ]
+                  ]
+                },
+                {
+                  "label": "พื้นที่น้ำ",
+                  "description": "พื้นที่น้ำ",
+                  "symbol": {
+                    "type": "esriSFS",
+                    "style": "esriSFSSolid",
+                    "color": [
+                      0,
+                      112,
+                      255,
+                      255
+                    ],
+                    "outline": {
+                      "type": "esriSLS",
+                      "style": "esriSLSSolid",
+                      "color": [
+                        0,
+                        0,
+                        0,
+                        0
+                      ],
+                      "width": 0.4
+                    }
+                  },
+                  "values": [
+                    [
+                      "พื้นที่น้ำ"
+                    ]
+                  ]
+                },
+                {
+                  "label": "พื้นที่ป่าไม้",
+                  "description": "พื้นที่ป่าไม้",
+                  "symbol": {
+                    "type": "esriSFS",
+                    "style": "esriSFSSolid",
+                    "color": [
+                      137,
+                      205,
+                      102,
+                      255
+                    ],
+                    "outline": {
+                      "type": "esriSLS",
+                      "style": "esriSLSSolid",
+                      "color": [
+                        0,
+                        0,
+                        0,
+                        0
+                      ],
+                      "width": 0.4
+                    }
+                  },
+                  "values": [
+                    [
+                      "พื้นที่ป่าไม้"
+                    ]
+                  ]
+                },
+                {
+                  "label": "พื้นที่เกษตรกรรม",
+                  "description": "พื้นที่เกษตรกรรม",
+                  "symbol": {
+                    "type": "esriSFS",
+                    "style": "esriSFSSolid",
+                    "color": [
+                      255,
+                      255,
+                      115,
+                      255
+                    ],
+                    "outline": {
+                      "type": "esriSLS",
+                      "style": "esriSLSSolid",
+                      "color": [
+                        0,
+                        0,
+                        0,
+                        0
+                      ],
+                      "width": 0.4
+                    }
+                  },
+                  "values": [
+                    [
+                      "พื้นที่เกษตรกรรม"
+                    ]
+                  ]
+                },
+                {
+                  "label": "พื้นที่เบ็ดเตล็ด",
+                  "description": "พื้นที่เบ็ดเตล็ด",
+                  "symbol": {
+                    "type": "esriSFS",
+                    "style": "esriSFSSolid",
+                    "color": [
+                      166,
+                      80,
+                      40,
+                      255
+                    ],
+                    "outline": {
+                      "type": "esriSLS",
+                      "style": "esriSLSSolid",
+                      "color": [
+                        0,
+                        0,
+                        0,
+                        0
+                      ],
+                      "width": 0.4
+                    }
+                  },
+                  "values": [
+                    [
+                      "พื้นที่เบ็ดเตล็ด"
+                    ]
+                  ]
+                }
+              ]
+            }
+          ],
+          "uniqueValueInfos": [
+            {
+              "symbol": {
+                "type": "esriSFS",
+                "style": "esriSFSSolid",
+                "color": [
+                  255,
+                  115,
+                  223,
+                  255
+                ],
+                "outline": {
+                  "type": "esriSLS",
+                  "style": "esriSLSSolid",
+                  "color": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "width": 0.4
+                }
+              },
+              "value": "พื้นที่ชุมชนและสิ่งปลูกสร้าง",
+              "label": "พื้นที่ชุมชนและสิ่งปลูกสร้าง"
+            },
+            {
+              "symbol": {
+                "type": "esriSFS",
+                "style": "esriSFSSolid",
+                "color": [
+                  0,
+                  112,
+                  255,
+                  255
+                ],
+                "outline": {
+                  "type": "esriSLS",
+                  "style": "esriSLSSolid",
+                  "color": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "width": 0.4
+                }
+              },
+              "value": "พื้นที่น้ำ",
+              "label": "พื้นที่น้ำ"
+            },
+            {
+              "symbol": {
+                "type": "esriSFS",
+                "style": "esriSFSSolid",
+                "color": [
+                  137,
+                  205,
+                  102,
+                  255
+                ],
+                "outline": {
+                  "type": "esriSLS",
+                  "style": "esriSLSSolid",
+                  "color": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "width": 0.4
+                }
+              },
+              "value": "พื้นที่ป่าไม้",
+              "label": "พื้นที่ป่าไม้"
+            },
+            {
+              "symbol": {
+                "type": "esriSFS",
+                "style": "esriSFSSolid",
+                "color": [
+                  255,
+                  255,
+                  115,
+                  255
+                ],
+                "outline": {
+                  "type": "esriSLS",
+                  "style": "esriSLSSolid",
+                  "color": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "width": 0.4
+                }
+              },
+              "value": "พื้นที่เกษตรกรรม",
+              "label": "พื้นที่เกษตรกรรม"
+            },
+            {
+              "symbol": {
+                "type": "esriSFS",
+                "style": "esriSFSSolid",
+                "color": [
+                  166,
+                  80,
+                  40,
+                  255
+                ],
+                "outline": {
+                  "type": "esriSLS",
+                  "style": "esriSLSSolid",
+                  "color": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "width": 0.4
+                }
+              },
+              "value": "พื้นที่เบ็ดเตล็ด",
+              "label": "พื้นที่เบ็ดเตล็ด"
+            }
+          ],
+          "fieldDelimiter": ",",
+          "authoringInfo": {
+            "colorRamp": {
+              "type": "multipart",
+              "colorRamps": [
+                {
+                  "type": "algorithmic",
+                  "algorithm": "esriCIELabAlgorithm",
+                  "fromColor": [
+                    117,
+                    138,
+                    43,
+                    255
+                  ],
+                  "toColor": [
+                    117,
+                    138,
+                    43,
+                    255
+                  ]
+                },
+                {
+                  "type": "algorithmic",
+                  "algorithm": "esriCIELabAlgorithm",
+                  "fromColor": [
+                    44,
+                    48,
+                    153,
+                    255
+                  ],
+                  "toColor": [
+                    44,
+                    48,
+                    153,
+                    255
+                  ]
+                },
+                {
+                  "type": "algorithmic",
+                  "algorithm": "esriCIELabAlgorithm",
+                  "fromColor": [
+                    158,
+                    46,
+                    78,
+                    255
+                  ],
+                  "toColor": [
+                    158,
+                    46,
+                    78,
+                    255
+                  ]
+                },
+                {
+                  "type": "algorithmic",
+                  "algorithm": "esriCIELabAlgorithm",
+                  "fromColor": [
+                    61,
+                    126,
+                    145,
+                    255
+                  ],
+                  "toColor": [
+                    61,
+                    126,
+                    145,
+                    255
+                  ]
+                },
+                {
+                  "type": "algorithmic",
+                  "algorithm": "esriCIELabAlgorithm",
+                  "fromColor": [
+                    167,
+                    49,
+                    173,
+                    255
+                  ],
+                  "toColor": [
+                    167,
+                    49,
+                    173,
+                    255
+                  ]
+                },
+                {
+                  "type": "algorithmic",
+                  "algorithm": "esriCIELabAlgorithm",
+                  "fromColor": [
+                    163,
+                    100,
+                    38,
+                    255
+                  ],
+                  "toColor": [
+                    163,
+                    100,
+                    38,
+                    255
+                  ]
+                },
+                {
+                  "type": "algorithmic",
+                  "algorithm": "esriCIELabAlgorithm",
+                  "fromColor": [
+                    39,
+                    150,
+                    113,
+                    255
+                  ],
+                  "toColor": [
+                    39,
+                    150,
+                    113,
+                    255
+                  ]
+                },
+                {
+                  "type": "algorithmic",
+                  "algorithm": "esriCIELabAlgorithm",
+                  "fromColor": [
+                    37,
+                    161,
+                    39,
+                    255
+                  ],
+                  "toColor": [
+                    37,
+                    161,
+                    39,
+                    255
+                  ]
+                },
+                {
+                  "type": "algorithmic",
+                  "algorithm": "esriCIELabAlgorithm",
+                  "fromColor": [
+                    61,
+                    82,
+                    143,
+                    255
+                  ],
+                  "toColor": [
+                    61,
+                    82,
+                    143,
+                    255
+                  ]
+                },
+                {
+                  "type": "algorithmic",
+                  "algorithm": "esriCIELabAlgorithm",
+                  "fromColor": [
+                    130,
+                    62,
+                    114,
+                    255
+                  ],
+                  "toColor": [
+                    130,
+                    62,
+                    114,
+                    255
+                  ]
+                },
+                {
+                  "type": "algorithmic",
+                  "algorithm": "esriCIELabAlgorithm",
+                  "fromColor": [
+                    163,
+                    95,
+                    82,
+                    255
+                  ],
+                  "toColor": [
+                    163,
+                    95,
+                    82,
+                    255
+                  ]
+                },
+                {
+                  "type": "algorithmic",
+                  "algorithm": "esriCIELabAlgorithm",
+                  "fromColor": [
+                    150,
+                    33,
+                    41,
+                    255
+                  ],
+                  "toColor": [
+                    150,
+                    33,
+                    41,
+                    255
+                  ]
+                },
+                {
+                  "type": "algorithmic",
+                  "algorithm": "esriCIELabAlgorithm",
+                  "fromColor": [
+                    110,
+                    80,
+                    166,
+                    255
+                  ],
+                  "toColor": [
+                    110,
+                    80,
+                    166,
+                    255
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        "scaleSymbols": true,
+        "transparency": 0,
+        "labelingInfo": null
+      },
+      "defaultVisibility": true,
+      "extent": {
+        "xmin": 10836251.036785029,
+        "ymin": 1936825.5683371709,
+        "xmax": 11283012.895672204,
+        "ymax": 2328189.836641093,
+        "spatialReference": {
+          "wkid": 102100,
+          "latestWkid": 3857,
+          "xyTolerance": 0.001,
+          "zTolerance": 0.001,
+          "mTolerance": 0.001,
+          "falseX": -20037700,
+          "falseY": -30241100,
+          "xyUnits": 148923141.92838538,
+          "falseZ": -100000,
+          "zUnits": 10000,
+          "falseM": -100000,
+          "mUnits": 10000
+        }
+      },
+      "hasAttachments": false,
+      "htmlPopupType": "esriServerHTMLPopupTypeAsHTMLText",
+      "displayField": "lul1_code",
+      "typeIdField": null,
+      "subtypeFieldName": null,
+      "subtypeField": null,
+      "defaultSubtypeCode": null,
+      "fields": [
+        {
+          "name": "length",
+          "type": "esriFieldTypeDouble",
+          "alias": "length",
+          "domain": null
+        },
+        {
+          "name": "gisdata.ugisdata.L09_LanduseNorth_GISTDA_50k.area",
+          "type": "esriFieldTypeDouble",
+          "alias": "area",
+          "domain": null
+        },
+        {
+          "name": "area_rai",
+          "type": "esriFieldTypeDouble",
+          "alias": "area_rai",
+          "domain": null
+        },
+        {
+          "name": "shape_leng",
+          "type": "esriFieldTypeDouble",
+          "alias": "shape_leng",
+          "domain": null
+        },
+        {
+          "name": "st_area(shape)",
+          "type": "esriFieldTypeDouble",
+          "alias": "st_area(shape)",
+          "domain": null
+        },
+        {
+          "name": "st_length(shape)",
+          "type": "esriFieldTypeDouble",
+          "alias": "st_length(shape)",
+          "domain": null
+        },
+        {
+          "name": "objectid_1",
+          "type": "esriFieldTypeOID",
+          "alias": "objectid_1",
+          "domain": null
+        },
+        {
+          "name": "objectid",
+          "type": "esriFieldTypeInteger",
+          "alias": "objectid",
+          "domain": null
+        },
+        {
+          "name": "lul1_code",
+          "type": "esriFieldTypeString",
+          "alias": "lul1_code",
+          "length": 1,
+          "domain": null
+        },
+        {
+          "name": "lul1_t",
+          "type": "esriFieldTypeString",
+          "alias": "lul1_t",
+          "length": 254,
+          "domain": null
+        },
+        {
+          "name": "lul1_e",
+          "type": "esriFieldTypeString",
+          "alias": "lul1_e",
+          "length": 254,
+          "domain": null
+        },
+        {
+          "name": "source",
+          "type": "esriFieldTypeString",
+          "alias": "source",
+          "length": 254,
+          "domain": null
+        },
+        {
+          "name": "tb_idn",
+          "type": "esriFieldTypeInteger",
+          "alias": "tb_idn",
+          "domain": null
+        },
+        {
+          "name": "mod_date",
+          "type": "esriFieldTypeDate",
+          "alias": "mod_date",
+          "length": 8,
+          "domain": null
+        },
+        {
+          "name": "scale",
+          "type": "esriFieldTypeString",
+          "alias": "scale",
+          "length": 50,
+          "domain": null
+        },
+        {
+          "name": "ta_id",
+          "type": "esriFieldTypeSmallInteger",
+          "alias": "ta_id",
+          "domain": null
+        },
+        {
+          "name": "tambon_t",
+          "type": "esriFieldTypeString",
+          "alias": "tambon_t",
+          "length": 50,
+          "domain": null
+        },
+        {
+          "name": "tambon_e",
+          "type": "esriFieldTypeString",
+          "alias": "tambon_e",
+          "length": 50,
+          "domain": null
+        },
+        {
+          "name": "am_id",
+          "type": "esriFieldTypeSmallInteger",
+          "alias": "am_id",
+          "domain": null
+        },
+        {
+          "name": "amphoe_t",
+          "type": "esriFieldTypeString",
+          "alias": "amphoe_t",
+          "length": 50,
+          "domain": null
+        },
+        {
+          "name": "ampohe_e",
+          "type": "esriFieldTypeString",
+          "alias": "ampohe_e",
+          "length": 50,
+          "domain": null
+        },
+        {
+          "name": "ch_id",
+          "type": "esriFieldTypeSmallInteger",
+          "alias": "ch_id",
+          "domain": null
+        },
+        {
+          "name": "changwat_t",
+          "type": "esriFieldTypeString",
+          "alias": "changwat_t",
+          "length": 50,
+          "domain": null
+        },
+        {
+          "name": "changwat_e",
+          "type": "esriFieldTypeString",
+          "alias": "changwat_e",
+          "length": 50,
+          "domain": null
+        },
+        {
+          "name": "re_nesdb",
+          "type": "esriFieldTypeString",
+          "alias": "re_nesdb",
+          "length": 50,
+          "domain": null
+        },
+        {
+          "name": "re_royin",
+          "type": "esriFieldTypeString",
+          "alias": "re_royin",
+          "length": 50,
+          "domain": null
+        },
+        {
+          "name": "shape",
+          "type": "esriFieldTypeGeometry",
+          "alias": "shape",
+          "domain": null
+        }
+      ],
+      "geometryField": {
+        "name": "shape",
+        "type": "esriFieldTypeGeometry",
+        "alias": "shape"
+      },
+      "indexes": [
+        {
+          "name": "r493_sde_rowid_uk",
+          "fields": "objectid_1",
+          "isAscending": true,
+          "isUnique": true,
+          "description": ""
+        },
+        {
+          "name": "a399_ix1",
+          "fields": "shape",
+          "isAscending": true,
+          "isUnique": true,
+          "description": ""
+        }
+      ],
+      "subtypes": [],
+      "relationships": [],
+      "canModifyLayer": true,
+      "canScaleSymbols": false,
+      "hasLabels": false,
+      "capabilities": "Map,Query,Data",
+      "maxRecordCount": 1000,
+      "maxSelectionCount": 2000,
+      "supportsStatistics": true,
+      "supportsExceedsLimitStatistics": true,
+      "supportsAdvancedQueries": true,
+      "supportedQueryFormats": "JSON, geoJSON, PBF",
+      "isDataVersioned": false,
+      "ownershipBasedAccessControlForFeatures": {
+        "allowOthersToQuery": true
+      },
+      "useStandardizedQueries": true,
+      "supportedSpatialRelationships": [
+        "esriSpatialRelIntersects",
+        "esriSpatialRelContains",
+        "esriSpatialRelCrosses",
+        "esriSpatialRelEnvelopeIntersects",
+        "esriSpatialRelIndexIntersects",
+        "esriSpatialRelOverlaps",
+        "esriSpatialRelTouches",
+        "esriSpatialRelWithin",
+        "esriSpatialRelRelation"
+      ],
+      "advancedQueryCapabilities": {
+        "useStandardizedQueries": true,
+        "supportsStatistics": true,
+        "supportsPercentileStatistics": true,
+        "supportsHavingClause": true,
+        "supportsOrderBy": true,
+        "supportsDistinct": true,
+        "supportsCountDistinct": true,
+        "supportsAdvancedQueryRelated": true,
+        "supportsQueryRelatedPagination": true,
+        "supportsPagination": true,
+        "supportsLod": false,
+        "supportsQueryWithLodSR": false,
+        "supportsTrueCurve": true,
+        "supportsQueryWithDatumTransformation": true,
+        "supportsReturningQueryExtent": true,
+        "supportsQueryWithDistance": true,
+        "supportsSqlExpression": true,
+        "supportsTimeRelation": true,
+        "supportsSqlFormat": false,
+        "supportsQueryAnalytic": true,
+        "supportsCurrentUserQueries": true
+      },
+      "supportsDatumTransformation": true,
+      "advancedQueryAnalyticCapabilities": {
+        "supportsLinearRegression": true,
+        "supportsAsync": false,
+        "supportsPercentileAnalytic": false
+      },
+      "dateFieldsTimeReference": null,
+      "preferredTimeReference": null,
+      "datesInUnknownTimezone": false,
+      "hasGeometryProperties": true,
+      "geometryProperties": {
+        "shapeAreaFieldName": "st_area(shape)",
+        "shapeLengthFieldName": "st_length(shape)",
+        "units": "esriDecimalDegrees",
+        "mapUnits": {
+          "uwkid": 9102
+        }
+      },
+      "hasMetadata": false,
+      "isDataArchived": false,
+      "archivingInfo": {
+        "supportsQueryWithHistoricMoment": false,
+        "startArchivingMoment": -1
+      },
+      "supportsCoordinatesQuantization": true,
+      "supportsDynamicLegends": true,
+      "serviceItemId": "260cefefb9d24d389685ac1b58280343"
+    }
+  },
+  "method": "A7-T categorical mode aggregation and GISTDA polygon rasterization; no bilinear categorical resampling",
+  "interpretation": "cross-dataset agreement, not accuracy"
+}

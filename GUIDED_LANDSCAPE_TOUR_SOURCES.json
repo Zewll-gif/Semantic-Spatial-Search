@@ -1,0 +1,16 @@
+{
+  "scene": "03 / Guided Landscape Tour",
+  "source_type": "existing_project_artifacts_only",
+  "full_aoi_rgb": "static/aoi/full_aoi_rgb.png",
+  "full_aoi_bounds": "static/aoi/full_aoi_rgb_bounds.json",
+  "tile_feature_source": "data/full_aoi_tile_features.json",
+  "interpretation": "The camera and hotspots use full-AOI preview imagery and tile centroids. Percentages are A7-T model-predicted valid-pixel shares, not Ground Truth or polygon-level confidence.",
+  "dem_used": false,
+  "terrain_elevation_claimed": false,
+  "stops": [
+    {"scene": "R1 Built-up / Urban", "tile_id": "tile_r08_c06", "centroid_lon": 98.98506289550053, "centroid_lat": 18.799718041102942, "a7t_class_share_percent": 92.88, "native_rgb": "/assets/tile_r08_c06/rgb"},
+    {"scene": "R2 Agricultural Land / Cropland", "tile_id": "tile_r03_c07", "centroid_lon": 98.9996392355989, "centroid_lat": 18.86912930210497, "a7t_class_share_percent": 60.32, "native_rgb": "/assets/tile_r03_c07/rgb"},
+    {"scene": "R4 Water", "tile_id": "tile_r06_c05", "centroid_lon": 98.970481564701, "centroid_lat": 18.827480629504134, "a7t_class_share_percent": 20.14, "native_rgb": "/assets/tile_r06_c05/rgb"},
+    {"scene": "R3 Tree / Woody Cover", "tile_id": "tile_r08_c01", "centroid_lon": 98.91218049127173, "centroid_lat": 18.79969798287687, "a7t_class_share_percent": 98.62, "native_rgb": "/assets/tile_r08_c01/rgb"}
+  ]
+}

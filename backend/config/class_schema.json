@@ -1,0 +1,79 @@
+{
+  "schema_id": "A7_REVISED7_V1",
+  "authoritative": true,
+  "source_model": "A7_RGBN_REVISED7_TVERSKY",
+  "classes": [
+    {
+      "class_id": "R1",
+      "numeric_id": 1,
+      "canonical_name": "Built-up & Impervious",
+      "thai_name": "พื้นที่สิ่งปลูกสร้างและพื้นผิวแข็ง",
+      "description": "อาคาร ถนน ลานคอนกรีต และพื้นผิวแข็งที่เกี่ยวข้องกับกิจกรรมของมนุษย์",
+      "aliases": ["สิ่งปลูกสร้าง", "พื้นที่สิ่งปลูกสร้าง", "สิ่งก่อสร้าง", "พื้นที่สิ่งก่อสร้าง", "พื้นผิวแข็ง", "อาคาร", "บ้านเรือน", "ถนน", "เมือง", "พื้นที่เมือง", "เขตเมือง", "ชุมชน", "built-up", "built up", "building", "buildings", "impervious", "urban"]
+    },
+    {
+      "class_id": "R2",
+      "numeric_id": 2,
+      "canonical_name": "Agricultural Land / Cropland",
+      "thai_name": "พื้นที่เกษตรกรรม",
+      "description": "พื้นที่เพาะปลูกและพื้นที่ใช้ประโยชน์ทางการเกษตร",
+      "aliases": ["พื้นที่เกษตร", "พื้นที่เกษตรกรรม", "พื้นที่เพาะปลูก", "เกษตร", "เกษตรกรรม", "สวน", "ไร่", "นา", "cropland", "agricultural land", "agriculture", "farm", "orchard"]
+    },
+    {
+      "class_id": "R3",
+      "numeric_id": 3,
+      "canonical_name": "Tree / Woody Cover",
+      "thai_name": "พื้นที่ต้นไม้และพืชพรรณไม้ยืนต้น",
+      "description": "พื้นที่ที่มีต้นไม้หรือพืชพรรณไม้ยืนต้นปกคลุม",
+      "aliases": ["ต้นไม้", "พื้นที่ต้นไม้", "ป่า", "ไม้ยืนต้น", "พืชพรรณไม้ยืนต้น", "tree", "trees", "woody cover", "forest"]
+    },
+    {
+      "class_id": "R4",
+      "numeric_id": 4,
+      "canonical_name": "Water",
+      "thai_name": "แหล่งน้ำ",
+      "description": "บ่อ หนอง คลอง ลำน้ำ และพื้นที่น้ำ",
+      "aliases": ["น้ำ", "แหล่งน้ำ", "พื้นที่น้ำ", "บ่อ", "หนอง", "คลอง", "ลำน้ำ", "แม่น้ำ", "water", "river", "canal", "pond"]
+    },
+    {
+      "class_id": "R5",
+      "numeric_id": 5,
+      "canonical_name": "Grassland / Herbaceous",
+      "thai_name": "พื้นที่ทุ่งหญ้าและพืชล้มลุก",
+      "description": "พื้นที่หญ้าหรือพืชล้มลุกที่ไม่แสดงลักษณะเกษตรกรรมอย่างชัดเจน",
+      "aliases": ["ทุ่งหญ้า", "พื้นที่หญ้า", "หญ้า", "พืชล้มลุก", "grassland", "grass", "herbaceous"]
+    },
+    {
+      "class_id": "R6",
+      "numeric_id": 6,
+      "canonical_name": "Bare Ground",
+      "thai_name": "ดินโล่ง",
+      "description": "พื้นที่ที่มีพื้นดินเป็นองค์ประกอบหลักและมีพืชปกคลุมน้อย",
+      "aliases": ["ดินโล่ง", "ดินเปล่า", "พื้นที่โล่ง", "bare ground", "bare soil", "open ground"]
+    },
+    {
+      "class_id": "R7",
+      "numeric_id": 7,
+      "canonical_name": "Uncertain / Cloud QA",
+      "thai_name": "ไม่แน่ใจ / เมฆหรือสิ่งบดบัง",
+      "description": "QA/uncertainty class สำหรับบริเวณที่มีหลักฐานไม่เพียงพอหรือไม่สามารถระบุประเภทได้อย่างมั่นใจ",
+      "is_qa_class": true,
+      "aliases": ["ไม่แน่ใจ", "เมฆ", "สิ่งบดบัง", "uncertain", "cloud", "cloud qa", "qa"]
+    }
+  ],
+  "unsupported_fine_grained_examples": [
+    "สวนลำไย",
+    "สวนทุเรียน",
+    "สวนยาง",
+    "นาข้าว",
+    "longan orchard",
+    "durian orchard",
+    "rice paddy"
+  ],
+  "rules": {
+    "aliases_are_translation_only": true,
+    "spatial_tools_accept_only": ["R1", "R2", "R3", "R4", "R5", "R6", "R7"],
+    "clarify_when_ambiguous": true,
+    "r7_is_qa_not_physical_landcover": true
+  }
+}

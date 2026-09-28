@@ -1,0 +1,33 @@
+{
+  "name": "NDWI",
+  "source_raster": "D:\\499_2\\image_planet\\files\\composite.tif",
+  "formula": "(Green - NIR) / (Green + NIR)",
+  "bands": {
+    "a": 2,
+    "b": 4
+  },
+  "dtype": "float32",
+  "nodata": -9999.0,
+  "width": 8302,
+  "height": 9308,
+  "crs": "EPSG:32647",
+  "transform": [
+    3.0,
+    0.0,
+    488442.0,
+    0.0,
+    -3.0,
+    2091723.0,
+    0.0,
+    0.0,
+    1.0
+  ],
+  "valid_pixels": 77200673,
+  "min": -0.9029799103736877,
+  "max": 0.5635982155799866,
+  "mean": -0.5048353672027588,
+  "median": -0.5194922685623169,
+  "std": 0.15085147321224213,
+  "preview_path": "D:\\499_4\\FINAL_ANALYSIS\\SPECTRAL_INDICES\\NDWI_FULL_AOI_PREVIEW.png",
+  "analysis_raster": "D:\\499_4\\FINAL_ANALYSIS\\SPECTRAL_INDICES\\NDWI_FULL_AOI.tif"
+}
