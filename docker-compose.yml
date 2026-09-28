@@ -6,7 +6,7 @@ services:
     container_name: semantic_app
     working_dir: /app
     ports:
-      - "8795:8795"
+      - "8888:8795"
     environment:
       GEOAI_DATA_ROOT: /app/data
       PYTHONPATH: /app/backend:/app
